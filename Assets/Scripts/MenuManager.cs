@@ -13,8 +13,9 @@ public class MenuManager : MonoBehaviour
     public void EndButtonPressed()
     {
         Application.Quit();
-#if UNITY_EDITOR
-        Debug.Log("Application closed.");
-#endif
+        #if UNITY_EDITOR
+                        Debug.Log("Application closed.");
+        #endif
+
     }
 }
