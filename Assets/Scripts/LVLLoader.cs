@@ -33,7 +33,7 @@ public class LVLLoader : MonoBehaviour
         for(int i = 0; i < matrix.GetLength(0); i++)
             for(int j = 0; j < matrix.GetLength(1); j++)
             {
-                GameObject gem = Instantiate(gems[matrix[i, j]], new Vector3(j, i, 0), Quaternion.identity, this.GameObject().transform); 
+                GameObject gem = Instantiate(gems[matrix[i, j]], new Vector3(j-1.5f, i-1, 0), Quaternion.identity, this.GameObject().transform); 
             }
     }
 }
