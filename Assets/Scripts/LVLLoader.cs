@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using Unity.VisualScripting;
 using System;
+using UnityEngine.SceneManagement;
 
 public class LVLLoader : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LVLLoader : MonoBehaviour
 
     void Start()
     {
-        FillBoard(MenuController.SelectedLevel);
+        FillBoard(MenuController.CurrentLevel);
     }
     private void FillBoard(int selectedLvl)
     {                                                
@@ -30,6 +31,8 @@ public class LVLLoader : MonoBehaviour
                                                  this.GameObject().transform);
                 }
         }
+        else
+            SceneManager.LoadScene("Menu");
     }
 }
 
