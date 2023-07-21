@@ -456,7 +456,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1686958913}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: RestartPressedButton
+        m_MethodName: OnNextButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -590,7 +590,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1686958913}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: HomePressedButton
+        m_MethodName: OnHomeButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1144,7 +1144,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2c7876708e66e3a48827a24d1181444c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 0.9098039, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1686958913}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: RestartPressedButton
+        m_MethodName: OnRestartButtonCLick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2454,7 +2454,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1686958913}
         m_TargetAssemblyTypeName: GameUI, Assembly-CSharp
-        m_MethodName: HomePressedButton
+        m_MethodName: OnHomeButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

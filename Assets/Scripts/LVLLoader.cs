@@ -12,29 +12,24 @@ public class LVLLoader : MonoBehaviour
 
     void Start()
     {
-        FillBoard(CreateMatrix());
+        FillBoard(MenuController.SelectedLevel);
     }
-    private int[,] CreateMatrix()
-    {
-        TextAsset jsonFile = Resources.Load<TextAsset>("LvlInfo");
-        lvlInfo = JsonUtility.FromJson<LvlInfo>(jsonFile.text);
+    private void FillBoard(int selectedLvl)
+    {                                                
+        TextAsset jsonFile = Resources.Load<TextAsset>("LVL" + selectedLvl);
+        if (jsonFile)
+        {
+            lvlInfo = JsonUtility.FromJson<LvlInfo>(jsonFile.text);
 
-        int[,] matrix = new int[lvlInfo.rows, lvlInfo.columns];
-
-        for(int i = 0; i < lvlInfo.rows; i++)
-            for(int j = 0; j < lvlInfo.columns; j++)
-                matrix[i, j] = lvlInfo.array[i * lvlInfo.columns + j];
-            
-        return matrix;
-    }
-
-    private void FillBoard(int[,] matrix)
-    {
-        for(int i = 0; i < matrix.GetLength(0); i++)
-            for(int j = 0; j < matrix.GetLength(1); j++)
-            {
-                GameObject gem = Instantiate(gems[matrix[i, j]], new Vector3(j-1.5f, i-1, 0), Quaternion.identity, this.GameObject().transform); 
-            }
+            for(int i = 0; i < lvlInfo.rows; i++)
+                for(int j = 0; j < lvlInfo.columns; j++)
+                {
+                    GameObject gem = Instantiate(gems[lvlInfo.array[i * lvlInfo.columns + j]],
+                                                 new Vector3(j - 1.5f, i - 1, 0),
+                                                 Quaternion.identity,
+                                                 this.GameObject().transform);
+                }
+        }
     }
 }
 
