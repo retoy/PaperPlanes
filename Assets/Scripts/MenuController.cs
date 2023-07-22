@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] private GameObject[] LevelButtons;
+    [SerializeField] private GameObject[] levelButtons;
 
     public void Start()
     {
@@ -30,7 +30,7 @@ public class MenuController : MonoBehaviour
         {
             if(PlayerPrefs.HasKey($"Level {i}"))
             {
-                LevelButtons[i].GetComponent<Button>().interactable = true;
+                levelButtons[i].GetComponent<Button>().interactable = true;
             }
         }
     }
