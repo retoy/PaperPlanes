@@ -1,15 +1,17 @@
+using System.ComponentModel.Design;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-    public static int CurrentLevel;
-    public static int LastLevel;
+    [SerializeField] private GameObject[] LevelButtons;
 
     public void Start()
     {
         CountLevels();
+        OpenAvailableLevels();
     }
 
     private void CountLevels()
@@ -19,11 +21,27 @@ public class MenuController : MonoBehaviour
         foreach(string json in jsonFile) 
             levelsCount++;
 
-        LastLevel = levelsCount;
+        GameStatus.LastLevel = levelsCount;
     }
+
+    private void OpenAvailableLevels()
+    {
+        for(int i = 1; i <= GameStatus.LastLevel; i++)
+        {
+            if(PlayerPrefs.HasKey($"Level {i}"))
+            {
+                LevelButtons[i].GetComponent<Button>().interactable = true;
+            }
+        }
+    }
+
     public void OnStartButtonClick(int level)
     {
-        CurrentLevel = level;
+        GameStatus.CurrentLevel = level;
         SceneManager.LoadScene("Game");
+    }
+    public void OnDeleteButtonClick()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }

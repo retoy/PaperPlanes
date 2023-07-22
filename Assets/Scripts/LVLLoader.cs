@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class LVLLoader : MonoBehaviour
 {
+    [SerializeField] private GameObject board;
     [SerializeField] private GameObject[] gems;
     private LvlInfo lvlInfo;
 
     void Start()
     {
-        FillBoard(MenuController.CurrentLevel);
+        FillBoard(GameStatus.CurrentLevel);
     }
     private void FillBoard(int selectedLvl)
     {                                                
@@ -28,7 +29,7 @@ public class LVLLoader : MonoBehaviour
                     GameObject gem = Instantiate(gems[lvlInfo.array[i * lvlInfo.columns + j]],
                                                  new Vector3(j - 1.5f, i - 1, 0),
                                                  Quaternion.identity,
-                                                 this.GameObject().transform);
+                                                 board.transform);
                 }
         }
         else

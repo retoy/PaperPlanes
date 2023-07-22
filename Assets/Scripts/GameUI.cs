@@ -10,9 +10,9 @@ public class GameUI : MonoBehaviour
     public void OnRestartButtonCLick() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     public void OnNextButtonClick()
     {
-        if(MenuController.CurrentLevel != MenuController.LastLevel)
+        if(GameStatus.CurrentLevel != GameStatus.LastLevel)
         {
-            MenuController.CurrentLevel++;
+            GameStatus.CurrentLevel++;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else
