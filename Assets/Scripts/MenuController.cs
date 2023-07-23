@@ -26,7 +26,7 @@ public class MenuController : MonoBehaviour
 
     private void OpenAvailableLevels()
     {
-        for(int i = 1; i <= GameStatus.LastLevel; i++)
+        for(int i = 1; i < GameStatus.LastLevel; i++)
         {
             if(PlayerPrefs.HasKey($"Level {i}"))
             {
