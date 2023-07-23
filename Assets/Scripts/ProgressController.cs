@@ -7,6 +7,7 @@ public class ProgressController : MonoBehaviour
     public void OnWinButtonClick(int starsAmount)
     {
         SaveLevelProgress(starsAmount);
+        SaveLevelProgress(starsAmount);       
     }
     private void SaveLevelProgress(int starsAmount)
     {
