@@ -1,17 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ProgressController : MonoBehaviour
+public class ProgressController : Singleton<ProgressController>
 {
-    public void OnWinButtonClick(int starsAmount)
+    public enum LevelStatus
     {
-        SaveLevelProgress(starsAmount);
-        SaveLevelProgress(starsAmount);       
+        NotAvailable,
+        Available,
+        Passed,
     }
-    private void SaveLevelProgress(int starsAmount)
+
+    public void MarkLevelPassed(int levelIndex, int stars)
     {
-        PlayerPrefs.SetInt($"Level {GameStatus.CurrentLevel}", starsAmount);
+        PlayerPrefs.SetInt($"Level {levelIndex}", stars);
         PlayerPrefs.Save();
+    }
+
+    public bool IsLevelPassed(int levelIndex)
+    {
+        return PlayerPrefs.HasKey($"Level {levelIndex}");
+    }
+
+    public LevelStatus GetLevelStatus(int levelIndex)
+    {
+        return LevelStatus.Available;
     }
 }
