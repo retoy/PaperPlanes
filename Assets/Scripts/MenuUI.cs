@@ -4,32 +4,41 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeField] private Button homeFromSettings;
-    [SerializeField] private Button homeFromShop;
-    [SerializeField] private Button play;
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button settingsButton;
+    [SerializeField] private Button shopButton;
 
     [SerializeField] private GameObject menuPanel;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject shopPanel;
-    public void OnHomeFromSettingsButtonClick() 
+
+    private void OnEnable()
     {
-        settingsPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        settingsButton.onClick.AddListener(OnSettingsButtonClick);
+        shopButton.onClick.AddListener(OnShopButtonClick);
+        playButton.onClick.AddListener(OnStartButtonClick);
     }
-    public void OnHomeFromShopButtonClick()
+    private void OnDisable()
     {
+        settingsButton.onClick.RemoveListener(OnSettingsButtonClick);
+        shopButton.onClick.RemoveListener(OnShopButtonClick);
+        playButton.onClick.RemoveListener(OnStartButtonClick);
+    }
+    public void OnStartButtonClick()
+    {
+        SceneManager.LoadScene("Game");
+    }
+    private void OnSettingsButtonClick()
+    {
+        settingsPanel.SetActive(true);
         shopPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        menuPanel.SetActive(false);
     }
-    public void Start()
+    public void OnShopButtonClick()
     {
-        homeFromSettings.onClick.AddListener(OnHomeFromSettingsButtonClick);
-        homeFromShop.onClick.AddListener(OnHomeFromShopButtonClick);
+        shopPanel.SetActive(true);
+        settingsPanel.SetActive(false);
+        menuPanel.SetActive(false);
     }
-    public void changeScene(int sceneid)
-    {
-        SceneManager.LoadScene(sceneid);
-    }
-    
 }
 

@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class AudioControler : MonoBehaviour
 {
-    public Sprite audioOn;
-    public Sprite audioOFF;
-    public GameObject buttonAudio;
-    public AudioClip clip;
-    public AudioSource audio;
+    [SerializeField] private Sprite audioOn;
+    [SerializeField] private Sprite audioOFF;
+    [SerializeField] private GameObject buttonAudio;
+    [SerializeField] private AudioClip clip;
+    [SerializeField] private AudioSource audioBackground;
     public void OnOffAudioButtonClick()
     {
         if (AudioListener.volume == 1)
@@ -26,7 +26,7 @@ public class AudioControler : MonoBehaviour
     }
     public void PlaySound()
     {
-        audio.PlayOneShot(clip);
+        audioBackground.PlayOneShot(clip);
     }
     
 }
