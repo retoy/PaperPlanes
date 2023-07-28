@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0e7a959613061814cae1a8838620d5cb
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Sunday
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 235261fb78a56b542aa0e9e77fb468ec, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

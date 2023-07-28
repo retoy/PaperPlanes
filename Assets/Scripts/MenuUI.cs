@@ -4,37 +4,32 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeField]
-    private Button[] levelButtons;
+    [SerializeField] private Button homeFromSettings;
+    [SerializeField] private Button homeFromShop;
+    [SerializeField] private Button play;
 
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject shopPanel;
+    public void OnHomeFromSettingsButtonClick() 
+    {
+        settingsPanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
+    public void OnHomeFromShopButtonClick()
+    {
+        shopPanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
     public void Start()
     {
-        OpenAvailableLevels();
+        homeFromSettings.onClick.AddListener(OnHomeFromSettingsButtonClick);
+        homeFromShop.onClick.AddListener(OnHomeFromShopButtonClick);
     }
-
-    private void OpenAvailableLevels()
+    public void changeScene(int sceneid)
     {
-        for (int i = 0; i < LevelsProvider.Instance.LevelsCount; i++)
-        {
-            var button = levelButtons[i]; //TODO create button here
-            var status = ProgressController.Instance.GetLevelStatus(i);
-
-            switch (status)
-            {
-                case ProgressController.LevelStatus.NotAvailable:
-                    button.interactable = false;
-                    break;
-                case ProgressController.LevelStatus.Available:
-                case ProgressController.LevelStatus.Passed:
-                    button.interactable = true;
-                    break;
-            }
-        }
+        SceneManager.LoadScene(sceneid);
     }
-
-    public void OnStartButtonClick(int level)
-    {
-        GameStatus.CurrentLevel = level;
-        SceneManager.LoadScene("Game");
-    }
+    
 }
+
