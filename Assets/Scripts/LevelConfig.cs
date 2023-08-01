@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class LevelConfig : MonoBehaviour
+﻿using UnityEngine;
+[CreateAssetMenu]
+public class LevelConfig : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    enum Curve
+    {   
+        Linear
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private Sprite sprite;
+    [SerializeField]
+    private Curve curve;
+    [SerializeField]
+    private float anglePerSec;
+    [SerializeField]
+    private int knifesToWin;
 }
