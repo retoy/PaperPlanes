@@ -23,10 +23,10 @@ public class AudioControler : MonoBehaviour
             AudioListener.volume = 1;
             buttonAudio.GetComponent <Image>().sprite = audioOn;
         }
+        
     }
     public void PlaySound()
     {
         audioBackground.PlayOneShot(clip);
     }
-    
 }

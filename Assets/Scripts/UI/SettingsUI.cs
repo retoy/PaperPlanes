@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-public class SettingsMenu : MonoBehaviour
+public class SettingsUI : MonoBehaviour
 {
     [SerializeField] private Button homeButton;
-    [SerializeField] private GameObject settingsPanel;
-    [SerializeField] private GameObject menuPanel;
-    
+    [SerializeField] private GameObject settingsPrefab;
+    [SerializeField] private GameObject menuPrefab;
+
     private void OnEnable()
     {
         homeButton.onClick.AddListener(OnHomeButtonClick);
@@ -16,7 +16,8 @@ public class SettingsMenu : MonoBehaviour
     }
     private void OnHomeButtonClick()
     {
-        settingsPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        settingsPrefab.SetActive(false);
+        GameObject menuPanel = Instantiate(menuPrefab, transform.parent); 
+        
     }
 }

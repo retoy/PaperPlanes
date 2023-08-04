@@ -4,9 +4,8 @@ using UnityEngine.UI;
 public class ShopUI: MonoBehaviour
 {
     [SerializeField] private Button homeButton;
-    [SerializeField] private GameObject shopPanel;
-    [SerializeField] private GameObject menuPanel;
-    
+    [SerializeField] private GameObject shopPredab;
+    [SerializeField] private GameObject menuPrefab;
     private void OnEnable()
     {
         homeButton.onClick.AddListener(OnHomeButtonClick);
@@ -17,7 +16,7 @@ public class ShopUI: MonoBehaviour
     }
     private void OnHomeButtonClick()
     {
-        shopPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        shopPredab.SetActive(false);
+        GameObject menuPanel = Instantiate(menuPrefab, transform.parent);
     }
 }

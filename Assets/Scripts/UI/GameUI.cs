@@ -1,0 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameUI : MonoBehaviour
+{
+    [SerializeField] private GameObject hudPrefab;
+    private void Awake()
+    {
+         Instantiate(hudPrefab, transform);
+    }
+}

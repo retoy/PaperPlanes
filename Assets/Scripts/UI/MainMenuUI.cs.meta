@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3de5b241c9bc1794c8d17c51684213ad
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playButton: {instanceID: 0}
+  - settingsButton: {instanceID: 0}
+  - shopButton: {instanceID: 0}
+  - menuPanel: {instanceID: 0}
+  - settingsPanel: {fileID: 7698514298011432550, guid: 69e5658403585594e8492ee8795ea7ac, type: 3}
+  - shopPanel: {fileID: 7084780264452283533, guid: 513cd19092f50ca418231709412a3cb0, type: 3}
+  - canvas: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

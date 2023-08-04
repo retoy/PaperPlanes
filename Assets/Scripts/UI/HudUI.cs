@@ -4,8 +4,10 @@ using UnityEngine.UI;
 public class HudUI : MonoBehaviour
 {
     [SerializeField] private Button looseButton;
-    [SerializeField] private GameObject gameOverPanel;
-    [SerializeField] private RectTransform canvas;
+
+    [SerializeField] private GameObject gameOverPrefab;
+
+    private GameObject gameOverPanel;
 
     private void OnEnable()
     {
@@ -19,7 +21,7 @@ public class HudUI : MonoBehaviour
 
     private void OnLooseButtonClick()
     {
-        Instantiate(gameOverPanel, canvas);
-        this.gameObject.SetActive(false);
+        gameOverPanel = Instantiate(gameOverPrefab, transform.parent);
+        gameOverPanel.SetActive(true);
     }
 }
