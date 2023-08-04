@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d693113ee4894a18aeb4a9c33bfdc0f5, type: 3}
-  m_Name: LevelsConfig
+  m_Name: Level 1
   m_EditorClassIdentifier: 
-  _levels:
-  - {fileID: 4900000, guid: 1f7f0ed19b89e4d45bcf3fd298062462, type: 3}
-  - {fileID: 4900000, guid: acc561e25d04f634fbce7781c058f27f, type: 3}
-  - {fileID: 4900000, guid: 9885b7d2e3185124da2981e63a9a30d5, type: 3}
+  sprite: {fileID: 0}
+  curve: 0
+  anglePerSec: 30
+  knifesToWin: 8
