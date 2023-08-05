@@ -993,7 +993,7 @@ GameObject:
   - component: {fileID: 5629116969405231231}
   - component: {fileID: 697579952821340663}
   m_Layer: 5
-  m_Name: settingsPanel
+  m_Name: SettingsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

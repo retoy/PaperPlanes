@@ -1,12 +1,15 @@
 using UnityEngine;
 
-[CreateAssetMenu]
-public class ProgressionConfig : ScriptableObject
+namespace Appegy
 {
-    private LevelConfig[] levelConfigs;
-
-    public LevelConfig GetConfig(int lvlIndex)
+    [CreateAssetMenu]
+    public class ProgressionConfig : ScriptableObject
     {
-        return levelConfigs[lvlIndex];
-    }    
+        private LevelConfig[] levelConfigs;
+
+        public LevelConfig GetConfig(int lvlIndex)
+        {
+            return levelConfigs[lvlIndex];
+        }    
+    }
 }

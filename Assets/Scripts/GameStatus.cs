@@ -1,4 +1,7 @@
-public static class GameStatus
+namespace Appegy
 {
-    public static int CurrentLevel;
+    public static class GameStatus
+    {
+        public static int CurrentLevel;
+    }
 }

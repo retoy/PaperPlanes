@@ -1,25 +1,28 @@
-﻿public class Singleton<T> where T : Singleton<T>, new()
+﻿namespace Appegy
 {
-    private static T instance = null;
-
-    private protected Singleton()
+    public class Singleton<T> where T : Singleton<T>, new()
     {
-    }
+        private static T instance = null;
 
-    protected virtual void Initialize()
-    {
-    }
-
-    public static T Instance
-    {
-        get
+        private protected Singleton()
         {
-            if (instance == null)
+        }
+
+        protected virtual void Initialize()
+        {
+        }
+
+        public static T Instance
+        {
+            get
             {
-                instance = new T();
-                instance.Initialize();
+                if (instance == null)
+                {
+                    instance = new T();
+                    instance.Initialize();
+                }
+                return instance;
             }
-            return instance;
         }
     }
 }

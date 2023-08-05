@@ -123,37 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &397524601
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 397524603}
-  m_Layer: 0
-  m_Name: MenuController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &397524603
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 397524601}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1509479427
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -162,9 +131,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1492832121359237595, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1577365613}
+    - target: {fileID: 1492832121359237595, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4182437308291130045, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
       propertyPath: m_Name
       value: Background
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160835182816866246, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160835182816866246, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160835182816866246, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5160835182816866246, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7768271094503607973, guid: 916b60a3913d87a4f97addcbecb1f1ac, type: 3}
       propertyPath: m_LocalPosition.x
@@ -582,13 +575,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f48b6f2681a674c9c2f36c928f1cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuPrefab: {fileID: 6589295154334714011, guid: 7c14cf0b0689b2a419a92c0aec2aec7b, type: 3}
+  _container: {fileID: 2061222098}
+  _menuPrefab: {fileID: 859308679687597877, guid: 7c14cf0b0689b2a419a92c0aec2aec7b, type: 3}
+  _settingsPanel: {fileID: 5629116969405231231, guid: 69e5658403585594e8492ee8795ea7ac, type: 3}
+  _shopPanel: {fileID: 628486821081465331, guid: 513cd19092f50ca418231709412a3cb0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1509479427}
-  - {fileID: 2061222098}
-  - {fileID: 1885182529}
   - {fileID: 1577365614}
-  - {fileID: 397524603}
+  - {fileID: 1885182529}
+  - {fileID: 2061222098}

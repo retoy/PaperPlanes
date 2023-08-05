@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
-[CreateAssetMenu]
-public class LevelConfig : ScriptableObject
+
+namespace Appegy
 {
-    enum Curve
-    {   
-        Linear
+    [CreateAssetMenu]
+    public class LevelConfig : ScriptableObject
+    {
+        enum Curve
+        {   
+            Linear
+        }
+        [SerializeField]
+        private Sprite sprite;
+        [SerializeField]
+        private Curve curve;
+        [SerializeField]
+        private float anglePerSec;
+        [SerializeField]
+        private int knifesToWin;
     }
-    [SerializeField]
-    private Sprite sprite;
-    [SerializeField]
-    private Curve curve;
-    [SerializeField]
-    private float anglePerSec;
-    [SerializeField]
-    private int knifesToWin;
 }
