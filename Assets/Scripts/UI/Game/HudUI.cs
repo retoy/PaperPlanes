@@ -6,39 +6,34 @@ namespace Appegy.UI.Game
 {
     public class HudUI : MonoBehaviour
     {
-        [SerializeField] 
-        private Button looseButton;
         [SerializeField]
-        private Button AddCoinButton;
+        private TMP_Text _coinsAmount;
         [SerializeField]
-        private Button AddScoreButton;
-        [SerializeField]
-        private TMP_Text coinsAmount;
-        [SerializeField]
-        private TMP_Text currentStage;
-
-        [SerializeField]
-        private GameObject gameOverPrefab;
-
+        private TMP_Text _currentStage;
 
         private GameProgress gameProgress;
-        private GameObject gameOverPanel;
+
+        [SerializeField]
+        private Button _looseButton;
+        [SerializeField]
+        private Button _addCoinButton;
+        [SerializeField]
+        private Button _addScoreButton;
+        public Button LooseButton => _looseButton;
+        public Button AddCoinButton => _addCoinButton;
+        public Button AddScoreButton => _addScoreButton;
 
         private void OnEnable()
         {
-            looseButton.onClick.AddListener(OnLooseButtonClick);
             AddCoinButton.onClick.AddListener(OnAddCoinButtonClick);
             AddScoreButton.onClick.AddListener(OnAddScoreButtonClick);
-
-            coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
+            _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
         }
 
         private void OnDisable()
         {
-            looseButton.onClick.RemoveListener(OnLooseButtonClick);
             AddCoinButton.onClick.RemoveListener(OnAddCoinButtonClick);
             AddScoreButton.onClick.RemoveListener(OnAddScoreButtonClick);
-
         }
 
         public void SetGameProgress(GameProgress gameProgress) 
@@ -46,12 +41,6 @@ namespace Appegy.UI.Game
             this.gameProgress = gameProgress; 
         }
 
-        private void OnLooseButtonClick()
-        {
-            gameOverPanel = Instantiate(gameOverPrefab, transform.parent);
-            gameOverPanel.SetActive(true);
-            gameProgress.SaveProgress();
-        }
         private void OnAddCoinButtonClick()
         {
             gameProgress.CoinsCollected++;
@@ -65,11 +54,11 @@ namespace Appegy.UI.Game
 
         private void ShowCurrentStage()
         {
-            currentStage.text = gameProgress.CurrentStage.ToString();
+            _currentStage.text = gameProgress.CurrentStage.ToString();
         }
         private void ShowCoinsAmount()
         {
-            coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
+            _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
         }
     }
 }

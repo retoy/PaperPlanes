@@ -329,7 +329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cba54c5f557864992f5f81ccd062aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hudPrefab: {fileID: 457579415675711222, guid: 54cd03a6677cddb4e9a6b9aebed12f51, type: 3}
+  _container: {fileID: 635632718}
+  _hudPrefab: {fileID: 5025862636093571199, guid: 54cd03a6677cddb4e9a6b9aebed12f51, type: 3}
+  _gameOverUI: {fileID: 4630983892446204547, guid: d59bdac97b5a9f34f84494ca4b4dc138, type: 3}
   gameProgress: {fileID: 1044236743}
 --- !u!1 &1044236742
 GameObject:

@@ -1,15 +1,62 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Appegy.UI.Game
 {
     public class GameUI : MonoBehaviour
     {
-        [SerializeField] private GameObject hudPrefab;
+        [SerializeField]
+        private RectTransform _container;
+        [SerializeField]
+        private HudUI _hudPrefab;
+        [SerializeField]
+        private GameOverUI _gameOverUI;
+
         [SerializeField] private GameProgress gameProgress;
         private void Awake()
         {
-            GameObject hud = Instantiate(hudPrefab, transform);
-            hud.GetComponent<HudUI>().SetGameProgress(gameProgress);
+            ShowHudUI();
+        }
+        private void ShowHudUI()
+        {
+            var panel = Instantiate(_hudPrefab, _container);
+            panel.LooseButton.onClick.AddListener(showLoosePanel);
+            panel.GetComponent<HudUI>().SetGameProgress(gameProgress);
+            void release()
+            {
+                panel.LooseButton.onClick.RemoveListener(showLoosePanel);
+
+                Destroy(panel.gameObject);
+            }
+            void showLoosePanel()
+            {
+                release();
+                ShowLoosePanel();
+            }
+
+        }
+        private void ShowLoosePanel()
+        {
+            var panel = Instantiate(_gameOverUI, _container);
+            panel.HomeButton.onClick.AddListener(home);
+            panel.RestartButton.onClick.AddListener(restart);
+
+            void release()
+            {
+                panel.HomeButton.onClick.RemoveListener(home);
+                panel.RestartButton.onClick.RemoveListener(restart);
+                Destroy(panel.gameObject);
+            }
+            void home()
+            {
+                release();
+                SceneManager.LoadScene("Menu");
+            }
+            void restart()
+            {
+                release();
+                SceneManager.LoadScene("Game");
+            }
         }
     }
 }
