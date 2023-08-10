@@ -8,7 +8,8 @@ namespace Appegy
     {
         public enum Curve
         {   
-            Linear
+            Linear,
+            Linear2
         }
         [SerializeField]
         private Sprite sprite;
