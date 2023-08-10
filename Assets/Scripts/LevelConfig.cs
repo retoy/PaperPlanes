@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+using System.Security.Cryptography.X509Certificates;
+using UnityEngine;
 
 namespace Appegy
 {
     [CreateAssetMenu]
     public class LevelConfig : ScriptableObject
     {
-        enum Curve
+        public enum Curve
         {   
-            Linear
+            Linear,
+            Linear2
         }
         [SerializeField]
         private Sprite sprite;
@@ -17,5 +19,22 @@ namespace Appegy
         private float anglePerSec;
         [SerializeField]
         private int knifesToWin;
+
+        public Sprite GetPrivateSprite()
+        {
+            return sprite;
+        }
+        public Curve GetPrivateCurve() 
+        { 
+            return curve; 
+        }
+        public float GetPrivateAnglePerSec()
+        { 
+            return anglePerSec; 
+        }
+        public int GetPrivateKnifesToWin() 
+        {  
+            return knifesToWin; 
+        }
     }
 }
