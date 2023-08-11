@@ -15,8 +15,6 @@ namespace Appegy.UI.Menu
         [SerializeField]
         private ShopPanel _shopPanel;
 
-        private GameObject _currentPanel;
-
         private void Awake()
         {
             ShowMainMenu();
@@ -78,6 +76,7 @@ namespace Appegy.UI.Menu
         private void ShowShopPanel()
         {
             var panel = Instantiate(_shopPanel, _container);
+
             panel.HomeButton.onClick.AddListener(home);
 
             void release()

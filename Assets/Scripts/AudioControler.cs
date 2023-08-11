@@ -5,28 +5,34 @@ namespace Appegy
 {
     public class AudioControler : MonoBehaviour
     {
-        [SerializeField] private Sprite audioOn;
-        [SerializeField] private Sprite audioOFF;
-        [SerializeField] private GameObject buttonAudio;
-        [SerializeField] private AudioClip clip;
-        [SerializeField] private AudioSource audioBackground;
+        [SerializeField]
+        private Sprite _audioOn;
+        [SerializeField]
+        private Sprite _audioOFF;
+        [SerializeField]
+        private GameObject _buttonAudio;
+        [SerializeField]
+        private AudioClip _clip;
+        [SerializeField]
+        private AudioSource _audioBackground;
+
         public void OnOffAudioButtonClick()
         {
-            if (AudioListener.volume == 1)
+            if(AudioListener.volume == 1)
             {
                 AudioListener.volume = 0;
-                buttonAudio.GetComponent<Image>().sprite = audioOFF;
+                _buttonAudio.GetComponent<Image>().sprite = _audioOFF;
             }
-            else 
+            else
             {
                 AudioListener.volume = 1;
-                buttonAudio.GetComponent <Image>().sprite = audioOn;
+                _buttonAudio.GetComponent<Image>().sprite = _audioOn;
             }
-        
         }
+
         public void PlaySound()
         {
-            audioBackground.PlayOneShot(clip);
+            _audioBackground.PlayOneShot(_clip);
         }
     }
 }

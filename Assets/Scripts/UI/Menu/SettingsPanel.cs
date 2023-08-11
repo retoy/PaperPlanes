@@ -6,7 +6,6 @@ namespace Appegy.UI.Menu
 {
     public class SettingsPanel : MonoBehaviour
     {
-        [FormerlySerializedAs("homeButton")]
         [SerializeField]
         private Button _homeButton;
 

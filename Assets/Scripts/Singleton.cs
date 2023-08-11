@@ -1,8 +1,8 @@
-﻿namespace Appegy
+namespace Appegy
 {
     public class Singleton<T> where T : Singleton<T>, new()
     {
-        private static T instance = null;
+        private static T _instance = null;
 
         private protected Singleton()
         {
@@ -16,12 +16,12 @@
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                 {
-                    instance = new T();
-                    instance.Initialize();
+                    _instance = new T();
+                    _instance.Initialize();
                 }
-                return instance;
+                return _instance;
             }
         }
     }

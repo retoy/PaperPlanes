@@ -92,7 +92,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 53.5
   m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -322,8 +322,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\rPAPER\n   PLANES"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 47753bff5a282ed419e4b4cd72cdaeb3, type: 2}
-  m_sharedMaterial: {fileID: -7378765820988078759, guid: 47753bff5a282ed419e4b4cd72cdaeb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
+  m_sharedMaterial: {fileID: -6368270602874676099, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -454,10 +454,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Score
+  m_text: high Score
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 47753bff5a282ed419e4b4cd72cdaeb3, type: 2}
-  m_sharedMaterial: {fileID: -7378765820988078759, guid: 47753bff5a282ed419e4b4cd72cdaeb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
+  m_sharedMaterial: {fileID: -6368270602874676099, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -711,8 +711,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 47753bff5a282ed419e4b4cd72cdaeb3, type: 2}
-  m_sharedMaterial: {fileID: -7378765820988078759, guid: 47753bff5a282ed419e4b4cd72cdaeb3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
+  m_sharedMaterial: {fileID: -6368270602874676099, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1069,7 +1069,7 @@ MonoBehaviour:
   _playButton: {fileID: 7503862768726823096}
   _settingsButton: {fileID: 8511935399667237902}
   _shopButton: {fileID: 9028762878304482211}
-  bestScore: {fileID: 7556208957924768754}
+  _bestScore: {fileID: 7556208957924768754}
 --- !u!1 &7517602781640183158
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,37 +7,45 @@ namespace Appegy.UI.Game
     {
         [SerializeField]
         private RectTransform _container;
+
         [SerializeField]
         private HudUI _hudPrefab;
         [SerializeField]
         private GameOverUI _gameOverUI;
 
-        [SerializeField] private GameProgress gameProgress;
+        [SerializeField]
+        private GameProgress _gameProgress;
+
         private void Awake()
         {
             ShowHudUI();
         }
+
         private void ShowHudUI()
         {
             var panel = Instantiate(_hudPrefab, _container);
+
             panel.LooseButton.onClick.AddListener(showLoosePanel);
-            panel.GetComponent<HudUI>().SetGameProgress(gameProgress);
+            panel.SetGameProgress(_gameProgress);
+
             void release()
             {
                 panel.LooseButton.onClick.RemoveListener(showLoosePanel);
-
+                _gameProgress.SaveProgress();
                 Destroy(panel.gameObject);
             }
+
             void showLoosePanel()
             {
                 release();
                 ShowLoosePanel();
             }
-
         }
+
         private void ShowLoosePanel()
         {
             var panel = Instantiate(_gameOverUI, _container);
+
             panel.HomeButton.onClick.AddListener(home);
             panel.RestartButton.onClick.AddListener(restart);
 
@@ -47,11 +55,13 @@ namespace Appegy.UI.Game
                 panel.RestartButton.onClick.RemoveListener(restart);
                 Destroy(panel.gameObject);
             }
+
             void home()
             {
                 release();
                 SceneManager.LoadScene("Menu");
             }
+
             void restart()
             {
                 release();

@@ -11,7 +11,6 @@ namespace Appegy.UI.Game
         [SerializeField]
         private TMP_Text _currentStage;
 
-        private GameProgress gameProgress;
 
         [SerializeField]
         private Button _looseButton;
@@ -19,6 +18,9 @@ namespace Appegy.UI.Game
         private Button _addCoinButton;
         [SerializeField]
         private Button _addScoreButton;
+
+        private GameProgress _gameProgress;
+
         public Button LooseButton => _looseButton;
         public Button AddCoinButton => _addCoinButton;
         public Button AddScoreButton => _addScoreButton;
@@ -36,26 +38,28 @@ namespace Appegy.UI.Game
             AddScoreButton.onClick.RemoveListener(OnAddScoreButtonClick);
         }
 
-        public void SetGameProgress(GameProgress gameProgress) 
-        { 
-            this.gameProgress = gameProgress; 
+        public void SetGameProgress(GameProgress gameProgress)
+        {
+            _gameProgress = gameProgress;
         }
 
         private void OnAddCoinButtonClick()
         {
-            gameProgress.CoinsCollected++;
+            PlayerProgress.Instance.CoinsTotal++;
             ShowCoinsAmount();
         }
+
         private void OnAddScoreButtonClick()
         {
-            gameProgress.CurrentStage++;
+            _gameProgress.CurrentStage++;
             ShowCurrentStage();
         }
 
         private void ShowCurrentStage()
         {
-            _currentStage.text = gameProgress.CurrentStage.ToString();
+            _currentStage.text = _gameProgress.CurrentStage.ToString();
         }
+
         private void ShowCoinsAmount()
         {
             _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();

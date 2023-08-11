@@ -8,6 +8,7 @@ namespace Appegy.UI.Game
     {
         [SerializeField] private Button _homeButton;
         [SerializeField] private Button _restartButton;
+
         public Button HomeButton => _homeButton;
         public Button RestartButton => _restartButton;
     }

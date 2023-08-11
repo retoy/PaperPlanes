@@ -5,11 +5,11 @@ namespace Appegy
     [CreateAssetMenu]
     public class ProgressionConfig : ScriptableObject
     {
-        private LevelConfig[] levelConfigs;
+        private LevelConfig[] _levelConfigs;
 
         public LevelConfig GetConfig(int lvlIndex)
         {
-            return levelConfigs[lvlIndex];
+            return _levelConfigs[lvlIndex];
         }    
     }
 }

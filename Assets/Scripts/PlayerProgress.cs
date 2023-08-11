@@ -21,6 +21,5 @@ namespace Appegy
         {
             PlayerPrefs.Save();
         }
-
     }
 }

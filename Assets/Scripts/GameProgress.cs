@@ -6,32 +6,22 @@ namespace Appegy
 {
     public class GameProgress : MonoBehaviour
     {
-        private int currentScore;
-        private int coinsCollected;
+        private int _currentScore;
 
         public int CurrentStage
         {
-            get => currentScore;
-            set => currentScore = value;
+            get => _currentScore;
+            set => _currentScore = value;
         }
-        public int CoinsCollected
-        {
-            get => coinsCollected;
-            set => coinsCollected = value;
-        }
+
         public void SaveProgress()
         {
-            if(coinsCollected != 0)
+            if(_currentScore > PlayerProgress.Instance.BestScore)
             {
-                PlayerProgress.Instance.CoinsTotal += coinsCollected;
-            }
-            if (currentScore > PlayerProgress.Instance.BestScore)
-            {
-                PlayerProgress.Instance.BestScore = currentScore;
+                PlayerProgress.Instance.BestScore = _currentScore;
             }
 
             PlayerProgress.Instance.SaveProgress();
         }
-        
     }
 }
