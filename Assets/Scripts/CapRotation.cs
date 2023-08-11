@@ -13,15 +13,14 @@ namespace Appegy
         
         private void Update()
         {
-            switch (Level.GetPrivateCurve())
+            float rotationAmount = Level.GetAnglePerSec * Time.deltaTime;
+            switch (Level.GetCurve)
             {
                 case LevelConfig.Curve.Linear:
-                    float rotationAmount = Level.GetPrivateAnglePerSec() * Time.deltaTime;
                     transform.Rotate(0, 0, rotationAmount);
                 break;
 
                 case LevelConfig.Curve.Linear2:
-                    rotationAmount = Level.GetPrivateAnglePerSec() * Time.deltaTime;
                     transform.Rotate(0, 0, rotationAmount + 10000);
                 break;  
             }                        

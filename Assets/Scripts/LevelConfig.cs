@@ -18,23 +18,12 @@ namespace Appegy
         [SerializeField]
         private float anglePerSec;
         [SerializeField]
-        private int knifesToWin;
+        private int knivesToWin;
 
-        public Sprite GetPrivateSprite()
-        {
-            return sprite;
-        }
-        public Curve GetPrivateCurve() 
-        { 
-            return curve; 
-        }
-        public float GetPrivateAnglePerSec()
-        { 
-            return anglePerSec; 
-        }
-        public int GetPrivateKnifesToWin() 
-        {  
-            return knifesToWin; 
-        }
+        public float GetAnglePerSec => anglePerSec;
+        public Curve GetCurve => curve;
+        public float GetKnivesToWin => knivesToWin;
+        public Sprite GetSprite => sprite;
+
     }
 }
