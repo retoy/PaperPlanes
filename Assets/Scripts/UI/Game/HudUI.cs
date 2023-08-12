@@ -23,20 +23,25 @@ namespace Appegy.UI.Game
         private GameProgress _gameProgress;
 
         public Button LooseButton => _looseButton;
-        public Button AddCoinButton => _addCoinButton;
-        public Button AddScoreButton => _addScoreButton;
 
-        private void OnEnable()
+        private void Start()
         {
-            AddCoinButton.onClick.AddListener(OnAddCoinButtonClick);
-            AddScoreButton.onClick.AddListener(OnAddScoreButtonClick);
+            _addCoinButton.onClick.AddListener(OnAddCoinButtonClick);
+            _addScoreButton.onClick.AddListener(OnAddScoreButtonClick);
+
+            _gameProgress.OnCurrentStageChanged += ShowCurrentStage;
+            PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsAmount;
+
             _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
-            AddCoinButton.onClick.RemoveListener(OnAddCoinButtonClick);
-            AddScoreButton.onClick.RemoveListener(OnAddScoreButtonClick);
+            _addCoinButton.onClick.RemoveListener(OnAddCoinButtonClick);
+            _addScoreButton.onClick.RemoveListener(OnAddScoreButtonClick);
+
+            _gameProgress.OnCurrentStageChanged -= ShowCurrentStage;
+            PlayerProgress.Instance.OnCoinsValueChanged -= ShowCoinsAmount;
         }
 
         public void SetGameProgress(GameProgress gameProgress)
@@ -47,13 +52,11 @@ namespace Appegy.UI.Game
         private void OnAddCoinButtonClick()
         {
             PlayerProgress.Instance.CoinsTotal++;
-            ShowCoinsAmount();
         }
 
         private void OnAddScoreButtonClick()
         {
             _gameProgress.CurrentStage++;
-            ShowCurrentStage();
         }
 
         private void ShowCurrentStage()
