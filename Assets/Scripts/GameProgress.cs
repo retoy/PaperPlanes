@@ -6,19 +6,19 @@ namespace Appegy
 {
     public class GameProgress : MonoBehaviour
     {
-        private int _currentScore;
+        private int _currentStage;
 
         public int CurrentStage
         {
-            get => _currentScore;
-            set => _currentScore = value;
+            get => _currentStage;
+            set => _currentStage = value;
         }
 
         public void SaveProgress()
         {
-            if(_currentScore > PlayerProgress.Instance.BestScore)
+            if(_currentStage > PlayerProgress.Instance.BestScore)
             {
-                PlayerProgress.Instance.BestScore = _currentScore;
+                PlayerProgress.Instance.BestScore = _currentStage;
             }
 
             PlayerProgress.Instance.SaveProgress();

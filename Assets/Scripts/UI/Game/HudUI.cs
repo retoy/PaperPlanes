@@ -19,6 +19,7 @@ namespace Appegy.UI.Game
         [SerializeField]
         private Button _addScoreButton;
 
+        [SerializeField]
         private GameProgress _gameProgress;
 
         public Button LooseButton => _looseButton;
