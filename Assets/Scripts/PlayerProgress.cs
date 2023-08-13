@@ -16,6 +16,11 @@ namespace Appegy
             get => PlayerPrefs.GetInt("Score");
             set => PlayerPrefs.SetInt("Score", value);
         }
+        public int PlaneValue
+        {
+            get => PlayerPrefs.GetInt("Plane");
+            set => PlayerPrefs.SetInt("Plane", value);
+        }
 
         public void SaveProgress()
         {
