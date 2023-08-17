@@ -27,6 +27,11 @@ namespace Appegy
                 OnBestScoreChanged?.Invoke();
             }
         }
+        public int PlaneValue
+        {
+            get => PlayerPrefs.GetInt("Plane");
+            set => PlayerPrefs.SetInt("Plane", value);
+        }
 
         public void SaveProgress()
         {
