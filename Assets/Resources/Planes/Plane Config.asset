@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98479518a572b2644bae70f78bb504a7, type: 3}
   m_Name: Plane Config
   m_EditorClassIdentifier: 
-  Plane:
+  _planeList:
   - {fileID: 21300000, guid: 3448397cb1649de45926260805e73b37, type: 3}
-  - {fileID: 21300000, guid: 3f7f768e71bca6544863c97d44c24d5d, type: 3}
+  - {fileID: 21300000, guid: 3448397cb1649de45926260805e73b37, type: 3}
+  - {fileID: 21300000, guid: 3448397cb1649de45926260805e73b37, type: 3}
+  - {fileID: 21300000, guid: 3448397cb1649de45926260805e73b37, type: 3}

@@ -7,7 +7,8 @@ namespace Appegy
     public class PlaneConfig : ScriptableObject
     {
         [SerializeField]
-        List<Sprite> Plane = new List <Sprite> ();
-        
+        private List<Sprite> _planeList = new List<Sprite>();
+
+        public List<Sprite> PlaneList => _planeList;
     }
 }

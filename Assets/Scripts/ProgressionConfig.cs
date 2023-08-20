@@ -10,6 +10,6 @@ namespace Appegy
         public LevelConfig GetConfig(int lvlIndex)
         {
             return _levelConfigs[lvlIndex];
-        }    
+        }
     }
 }

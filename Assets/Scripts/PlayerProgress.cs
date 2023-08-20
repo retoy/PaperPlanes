@@ -7,6 +7,7 @@ namespace Appegy
     {
         public event Action OnCoinsValueChanged;
         public event Action OnBestScoreChanged;
+        public event Action OnPlaneChanged;
 
         public int CoinsTotal
         {
@@ -27,10 +28,15 @@ namespace Appegy
                 OnBestScoreChanged?.Invoke();
             }
         }
-        public int PlaneValue
+
+        public int CurrentPlane
         {
             get => PlayerPrefs.GetInt("Plane");
-            set => PlayerPrefs.SetInt("Plane", value);
+            set
+            {
+                PlayerPrefs.SetInt("Plane", value);
+                OnPlaneChanged?.Invoke();
+            }
         }
 
         public void SaveProgress()

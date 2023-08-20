@@ -11,7 +11,6 @@ namespace Appegy.UI.Game
         [SerializeField]
         private TMP_Text _currentStage;
 
-
         [SerializeField]
         private Button _looseButton;
         [SerializeField]
