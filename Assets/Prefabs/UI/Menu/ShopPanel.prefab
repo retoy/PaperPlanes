@@ -242,7 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _homeButton: {fileID: 3155511187689409419}
   _planeConfig: {fileID: 11400000, guid: 7486799e88cf3c94c8a13a182f198ebb, type: 2}
-  _cellPrefab: {fileID: 689527366355845022, guid: 812512b0a319ab94da07257bdb915885, type: 3}
+  _cellPrefab: {fileID: 2799142330368318272, guid: 812512b0a319ab94da07257bdb915885, type: 3}
 --- !u!1 &7974663096485336876
 GameObject:
   m_ObjectHideFlags: 0
