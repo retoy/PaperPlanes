@@ -31,7 +31,6 @@ namespace Appegy.UI.Game
             void release()
             {
                 panel.LooseButton.onClick.RemoveListener(showLoosePanel);
-                _gameProgress.SaveProgress();
                 Destroy(panel.gameObject);
             }
 

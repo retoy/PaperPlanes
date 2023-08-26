@@ -9,19 +9,17 @@ namespace Appegy
     public class ShopCell : MonoBehaviour
     {
         [SerializeField]
-        private Image _sprite;
+        private Image _frameImage;
         [SerializeField]
         private Button _button;
         [SerializeField]
         private TMP_Text _text;
+        [SerializeField]
+        private Image _planeImage;
 
-        public Image Image => _sprite;
+        public Image FrameImage => _frameImage;
+        public Image PlaneImage => _planeImage;
         public Button Button => _button;
         public TMP_Text Text => _text;
-
-        private void Start()
-        {
-                
-        }
     }
 }

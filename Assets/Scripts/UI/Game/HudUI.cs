@@ -31,7 +31,7 @@ namespace Appegy.UI.Game
             _gameProgress.OnCurrentStageChanged += ShowCurrentStage;
             PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsAmount;
 
-            _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
+            ShowCoinsAmount();
         }
 
         private void OnDestroy()

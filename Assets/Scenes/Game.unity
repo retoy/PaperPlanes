@@ -425,6 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toHitObjectPrefab: {fileID: 1556356220560704000, guid: 6f88a9818e6fc964496bd36727be64b8, type: 3}
   _throwObjectPrefab: {fileID: 8525400642135813152, guid: c6e7529a28673b04cb625357f514e3b8, type: 3}
+  _gameProgress: {fileID: 1044236743}
 --- !u!1 &1360493875
 GameObject:
   m_ObjectHideFlags: 0
