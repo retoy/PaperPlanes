@@ -12,11 +12,15 @@ namespace Appegy
         private GameObject _throwObjectPrefab;
         [SerializeField]
         private GameProgress _gameProgress;
+        [SerializeField]
+        private PlaneConfig _planeConfig;
 
         private void Awake()
         {
             var cap = Instantiate(_toHitObjectPrefab,transform.GetChild(0));
+
             var arrow = Instantiate(_throwObjectPrefab,transform.GetChild(1));
+            arrow.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane];
         }
 
         private void OnDestroy()
