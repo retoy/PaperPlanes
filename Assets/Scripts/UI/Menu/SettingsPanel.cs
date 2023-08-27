@@ -27,13 +27,11 @@ namespace Appegy.UI.Menu
             if (AudioListener.volume == 1)
             {
                 AudioListener.volume = 0;
-                GameManager.Instance.GetComponent<AudioControler>().StopAudio();
                 _image.sprite = _audioOFF;
             }
             else
             {
                 AudioListener.volume = 1;
-                GameManager.Instance.GetComponent<AudioControler>().PlayAudio();
                 _image.sprite = _audioOn;
             }
         }

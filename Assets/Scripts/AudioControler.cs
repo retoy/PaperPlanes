@@ -8,23 +8,23 @@ namespace Appegy
         [SerializeField]
         private AudioClip _clip;
         [SerializeField]
-        private AudioSource _audioBackground;
+        private AudioSource _music;
 
         private void Start()
         {
-            _audioBackground.clip = _clip;
-            _audioBackground.loop = true;
-            _audioBackground.Play();
+            _music.clip = _clip;
+            _music.loop = true;
+            _music.Play();
         }
 
         public void StopAudio()
         {
-            _audioBackground.Stop();
+            _music.Stop();
         }
 
         public void PlayAudio()
         {
-            _audioBackground.Play();
+            _music.Play();
         }
     }
 }
