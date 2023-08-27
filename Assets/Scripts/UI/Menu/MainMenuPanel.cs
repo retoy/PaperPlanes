@@ -16,7 +16,6 @@ namespace Appegy.UI.Menu
         private Button _shopButton;
         [SerializeField]
         private TMP_Text _bestScore;
-
         public Button PlayButton => _playButton;
         public Button SettingsButton => _settingsButton;
         public Button ShopButton => _shopButton;

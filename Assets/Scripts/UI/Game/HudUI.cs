@@ -4,13 +4,13 @@ using TMPro;
 
 namespace Appegy.UI.Game
 {
-    public class HudUI : MonoBehaviour
+    public class
+        HudUI : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text _coinsAmount;
         [SerializeField]
         private TMP_Text _currentStage;
-
         [SerializeField]
         private Button _looseButton;
         [SerializeField]

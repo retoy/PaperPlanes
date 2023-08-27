@@ -10,7 +10,6 @@ namespace Appegy
             Linear,
             Linear2
         }
-
         [SerializeField]
         private Sprite _cap;
         [SerializeField]

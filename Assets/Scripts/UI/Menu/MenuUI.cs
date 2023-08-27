@@ -7,7 +7,6 @@ namespace Appegy.UI.Menu
     {
         [SerializeField]
         private RectTransform _container;
-
         [SerializeField]
         private MainMenuPanel _menuPrefab;
         [SerializeField]
