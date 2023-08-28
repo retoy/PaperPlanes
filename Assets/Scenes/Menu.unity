@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 1720159144}
   - component: {fileID: 1720159145}
   m_Layer: 0
-  m_Name: AudioController
+  m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,7 +439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: 839ddb7ae772b974f8698fba7c2e4544, type: 3}
-  _music: {fileID: 0}
+  _music: {fileID: 1720159145}
+  createdTag: MUSIC
 --- !u!82 &1720159145
 AudioSource:
   m_ObjectHideFlags: 0

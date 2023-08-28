@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,26 +6,28 @@ namespace Appegy
 {
     public class AudioControler : MonoBehaviour
     {
-        [SerializeField]
-        private AudioClip _clip;
-        [SerializeField]
-        private AudioSource _music;
-
+        [SerializeField] private AudioClip _clip;
+        [SerializeField] private AudioSource _music;
+        [SerializeField] private string createdTag;
         private void Start()
         {
             _music.clip = _clip;
             _music.loop = true;
             _music.Play();
         }
-
-        public void StopAudio()
+        
+        private void Awake()
         {
-            _music.Stop();
-        }
-
-        public void PlayAudio()
-        {
-            _music.Play();
+            GameObject obj = GameObject.FindWithTag(createdTag);
+            if (obj != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                this.gameObject.tag = createdTag;
+                DontDestroyOnLoad(this.gameObject);
+            }
         }
     }
 }
