@@ -440,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _clip: {fileID: 8300000, guid: 839ddb7ae772b974f8698fba7c2e4544, type: 3}
   _music: {fileID: 1720159145}
-  createdTag: MUSIC
+  _musicTag: MUSIC
 --- !u!82 &1720159145
 AudioSource:
   m_ObjectHideFlags: 0
