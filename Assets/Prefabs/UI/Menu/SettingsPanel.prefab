@@ -416,7 +416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SOUND GAME
+  m_text: music
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
   m_sharedMaterial: {fileID: -6368270602874676099, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
@@ -754,7 +754,7 @@ GameObject:
   - component: {fileID: 7290980721252369955}
   - component: {fileID: 5793747566081220793}
   m_Layer: 5
-  m_Name: SoundOnOFButton
+  m_Name: AudioButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -863,7 +863,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5629116969405231231}
         m_TargetAssemblyTypeName: Appegy.UI.Menu.SettingsPanel, Assembly-CSharp
-        m_MethodName: OnOffAudioButtonClick
+        m_MethodName: AudioButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1039,10 +1039,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7087180959378922197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.18337037, y: 0.68166685}
-  m_AnchorMax: {x: 0.6462592, y: 0.7303959}
-  m_AnchoredPosition: {x: -5.2466125, y: 1.096405}
-  m_SizeDelta: {x: 10.4933, y: 16.765}
+  m_AnchorMin: {x: 0.17500001, y: 0.68166685}
+  m_AnchorMax: {x: 0.6462592, y: 0.758}
+  m_AnchoredPosition: {x: 8.223114, y: -1.8374023}
+  m_SizeDelta: {x: 19.433, y: 10.897301}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4925868775235050204
 CanvasRenderer:
@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: PLAY SOUND
+  m_text: Sound Effects
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
   m_sharedMaterial: {fileID: -6368270602874676099, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}

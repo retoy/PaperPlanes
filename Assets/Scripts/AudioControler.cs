@@ -1,4 +1,5 @@
 using System.Runtime.CompilerServices;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,12 @@ namespace Appegy
         [SerializeField] private AudioClip _clip;
         [SerializeField] private AudioSource _music;
         [SerializeField] private string createdTag;
+       
         private void Start()
         {
             _music.clip = _clip;
             _music.loop = true;
+            AudioListener.volume = PlayerProgress.Instance.MusicVolume;
             _music.Play();
         }
         
@@ -28,7 +31,11 @@ namespace Appegy
                 this.gameObject.tag = createdTag;
                 DontDestroyOnLoad(this.gameObject);
             }
+
+
         }
+        
+        
     }
 }
 

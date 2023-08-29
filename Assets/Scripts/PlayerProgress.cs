@@ -8,7 +8,7 @@ namespace Appegy
         public event Action OnCoinsValueChanged;
         public event Action OnBestScoreChanged;
         public event Action OnPlaneChanged;
-
+        public event Action OnMusicVolumeChanged;
         public int CoinsTotal
         {
             get => PlayerPrefs.GetInt("Coins");
@@ -38,7 +38,19 @@ namespace Appegy
                 OnPlaneChanged?.Invoke();
             }
         }
-
+        public float MusicVolume
+        {
+            get => PlayerPrefs.GetFloat("Volume");
+            set
+            {
+                {
+                    
+                    PlayerPrefs.SetFloat("Volume", value);
+                    OnMusicVolumeChanged?.Invoke();
+                }
+            }
+        }
+        
         public void SaveProgress()
         {
             PlayerPrefs.Save();
