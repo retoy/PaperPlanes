@@ -7,9 +7,12 @@ namespace Appegy
 {
     public class AudioControler : MonoBehaviour
     {
-        [SerializeField] private AudioClip _clip;
-        [SerializeField] private AudioSource _music;
-        [SerializeField] private string createdTag;
+        [SerializeField]
+        private AudioClip _clip;
+        [SerializeField]
+        private AudioSource _music;
+        [SerializeField]
+        private string _musicTag;
        
         private void Start()
         {
@@ -18,24 +21,20 @@ namespace Appegy
             AudioListener.volume = PlayerProgress.Instance.MusicVolume;
             _music.Play();
         }
-        
+           
         private void Awake()
         {
-            GameObject obj = GameObject.FindWithTag(createdTag);
+            GameObject obj = GameObject.FindWithTag(_musicTag);
             if (obj != null)
             {
-                Destroy(this.gameObject);
+                Destroy(gameObject);
             }
             else
             {
-                this.gameObject.tag = createdTag;
-                DontDestroyOnLoad(this.gameObject);
+                gameObject.tag = _musicTag;
+                DontDestroyOnLoad(gameObject);
             }
-
-
         }
-        
-        
     }
 }
 

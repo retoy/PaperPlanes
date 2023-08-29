@@ -42,6 +42,7 @@ namespace Appegy.UI.Menu
             PlayerProgress.Instance.SaveProgress();
             
         }
+
         public void AudioButtonSpriteChange()
         {
             if (AudioListener.volume == 0)
@@ -54,8 +55,5 @@ namespace Appegy.UI.Menu
             }
             PlayerProgress.Instance.SaveProgress();
         }
-
-
     }
-
 }

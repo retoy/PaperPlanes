@@ -67,6 +67,5 @@ namespace Appegy.UI.Menu
                 shopAssortment[index].Text.text = "current";
             }
         }
-        
     }
 }
