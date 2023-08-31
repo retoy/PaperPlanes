@@ -19,14 +19,22 @@ namespace Appegy.UI.Menu
         [SerializeField]
         private ShopCell _cellPrefab;
 
+        private List<ShopCell> shopAssortment = new List<ShopCell>();
+        private ShopCell _currentPlane;
+
         public Button HomeButton => _homeButton;
 
-        private void OnEnable()
+        private void Start()
         {
+            PlayerProgress.Instance.OnPlaneChanged += SetCurrentPlane;
+
             ShowShopAssortment();
+            SetCurrentPlane();
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
+            PlayerProgress.Instance.OnPlaneChanged -= SetCurrentPlane;
+
             foreach(var plane in transform.GetComponentInChildren<GridLayoutGroup>().GetComponentsInChildren<ShopCell>())
             {
                 plane.Button.onClick.RemoveAllListeners();
@@ -37,8 +45,6 @@ namespace Appegy.UI.Menu
 
         private void ShowShopAssortment()
         {
-            List<ShopCell> shopAssortment = new List<ShopCell>();
-
             for(int index = 0; index < _planeConfig.PlaneList.Count; index++)
             {
                 int currentIndex = index;
@@ -49,23 +55,23 @@ namespace Appegy.UI.Menu
                 plane.Button.onClick.AddListener(() => onShopCellButtonClick(currentIndex));
                 shopAssortment.Add(plane);
             }
-
-            showCurrentPlane(PlayerProgress.Instance.CurrentPlane);
+            _currentPlane = shopAssortment[PlayerProgress.Instance.CurrentPlane];
 
             void onShopCellButtonClick(int newIndex)
             {
-                shopAssortment[PlayerProgress.Instance.CurrentPlane].FrameImage.color = Color.white;
-                shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "empty";
-
                 PlayerProgress.Instance.CurrentPlane = newIndex;
-                showCurrentPlane(newIndex);
             }
+        }
 
-            void showCurrentPlane(int index)
-            {
-                shopAssortment[index].FrameImage.color = Color.green;
-                shopAssortment[index].Text.text = "current";
-            }
+        private void SetCurrentPlane()
+        {
+            _currentPlane.FrameImage.color = Color.white;
+            _currentPlane.Text.text = "empty";
+
+            shopAssortment[PlayerProgress.Instance.CurrentPlane].FrameImage.color = Color.green;
+            shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "current";
+
+            _currentPlane = shopAssortment[PlayerProgress.Instance.CurrentPlane];
         }
     }
 }
