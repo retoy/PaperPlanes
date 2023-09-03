@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d3d46ad4a47704f86bc2535730ddf3, type: 3}
   m_Name: ProgressionConfig
   m_EditorClassIdentifier: 
+  _levelConfigs:
+  - {fileID: 11400000, guid: 96f48b43f6a0ead459edec7e5844932e, type: 2}
+  - {fileID: 11400000, guid: 5c9f95591ab66ff4abf739fc7973a4be, type: 2}

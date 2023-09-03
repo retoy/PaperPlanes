@@ -1,31 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Appegy
 {
     public class GameController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _toHitObjectPrefab;
+        private CapRotation _cap;
         [SerializeField]
-        private GameObject _throwObjectPrefab;
+        private GameObject _planeToCast;
         [SerializeField]
         private GameProgress _gameProgress;
         [SerializeField]
         private PlaneConfig _planeConfig;
+        [SerializeField]
+        private ProgressionConfig _progConfig;
 
-        private void Awake()
+        private void Start()
         {
-            var cap = Instantiate(_toHitObjectPrefab,transform.GetChild(0));
+            LoadLevel();
 
-            var arrow = Instantiate(_throwObjectPrefab,transform.GetChild(1));
-            arrow.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane];
+            _gameProgress.OnCurrentStageChanged += LoadLevel;
+
+            var plane = Instantiate(_planeToCast, transform.GetChild(1));
+            plane.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane];
         }
 
         private void OnDestroy()
         {
+            _gameProgress.OnCurrentStageChanged -= LoadLevel;
+
             _gameProgress.SaveProgress();
+        }
+
+        private void LoadLevel()
+        {
+            var stage = _gameProgress.CurrentStage;
+
+            var currentLvl = _progConfig.GetConfig(stage);
+            var spriteRenderer = _cap.GetComponent<SpriteRenderer>();
+
+            _cap.Level = currentLvl;
+            spriteRenderer.sprite = currentLvl.Cap;
+
+            _gameProgress.PlanesToWin = currentLvl.PlanesToWin;
         }
     }
 }
