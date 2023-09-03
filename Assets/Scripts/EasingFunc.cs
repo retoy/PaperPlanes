@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Appegy
 {
-    public class EasingFunc : MonoBehaviour
+    public class EasingFunc
     {
         public static float Linear(float k)
         {
