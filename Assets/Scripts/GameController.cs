@@ -20,7 +20,7 @@ namespace Appegy
             var cap = Instantiate(_toHitObjectPrefab,transform.GetChild(0));
 
             var arrow = Instantiate(_throwObjectPrefab,transform.GetChild(1));
-            arrow.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane];
+            arrow.GetComponent<SpriteRenderer>().sprite = _planeConfig.planeList[PlayerProgress.Instance.CurrentPlane].Sprite;
         }
 
         private void OnDestroy()

@@ -18,7 +18,7 @@ namespace Appegy.UI.Menu
         private PlaneConfig _planeConfig;
         [SerializeField]
         private ShopCell _cellPrefab;
-
+        
         public Button HomeButton => _homeButton;
 
         private void OnEnable()
@@ -39,12 +39,12 @@ namespace Appegy.UI.Menu
         {
             List<ShopCell> shopAssortment = new List<ShopCell>();
 
-            for(int index = 0; index < _planeConfig.PlaneList.Count; index++)
+            for(int index = 0; index < _planeConfig.planeList.Count; index++)
             {
                 int currentIndex = index;
 
                 var plane = Instantiate(_cellPrefab, transform.GetComponentInChildren<GridLayoutGroup>().transform);
-                plane.PlaneImage.sprite = _planeConfig.PlaneList[index];
+                plane.PlaneImage.sprite = _planeConfig.planeList[index].Sprite;
 
                 plane.Button.onClick.AddListener(() => onShopCellButtonClick(currentIndex));
                 shopAssortment.Add(plane);
