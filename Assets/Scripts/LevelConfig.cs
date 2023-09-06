@@ -15,13 +15,13 @@ namespace Appegy
         [SerializeField]
         private Function _curve;
         [SerializeField]
-        private float _anglePerSec;
+        private float _speed;
         [SerializeField]
-        private int _knivesToWin;
+        private int _planesToWin;
 
-        public float AnglePerSec => _anglePerSec;
+        public float Speed => _speed;
         public Function Curve => _curve;
-        public float KnivesToWin => _knivesToWin;
+        public int PlanesToWin => _planesToWin;
         public Sprite Cap => _cap;
 
     }

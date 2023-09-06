@@ -16,7 +16,11 @@ namespace Appegy.UI.Game
         [SerializeField]
         private Button _addCoinButton;
         [SerializeField]
-        private Button _addScoreButton;
+        private Button _castPlaneButton;
+        [SerializeField]
+        private GameObject _planeCounter;
+        [SerializeField]
+        private GameObject _planePrefab;
 
         [SerializeField]
         private GameProgress _gameProgress;
@@ -26,9 +30,10 @@ namespace Appegy.UI.Game
         private void Start()
         {
             _addCoinButton.onClick.AddListener(OnAddCoinButtonClick);
-            _addScoreButton.onClick.AddListener(OnAddScoreButtonClick);
+            _castPlaneButton.onClick.AddListener(OnCastPlaneButtonClick);
 
             _gameProgress.OnCurrentStageChanged += ShowCurrentStage;
+            _gameProgress.OnPlanesToWinChanged += ShowPlanesToHit;
             PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsAmount;
 
             ShowCoinsAmount();
@@ -37,9 +42,10 @@ namespace Appegy.UI.Game
         private void OnDestroy()
         {
             _addCoinButton.onClick.RemoveListener(OnAddCoinButtonClick);
-            _addScoreButton.onClick.RemoveListener(OnAddScoreButtonClick);
+            _castPlaneButton.onClick.RemoveListener(OnCastPlaneButtonClick);
 
             _gameProgress.OnCurrentStageChanged -= ShowCurrentStage;
+            _gameProgress.OnPlanesToWinChanged -= ShowPlanesToHit;
             PlayerProgress.Instance.OnCoinsValueChanged -= ShowCoinsAmount;
         }
 
@@ -53,19 +59,39 @@ namespace Appegy.UI.Game
             PlayerProgress.Instance.CoinsTotal++;
         }
 
-        private void OnAddScoreButtonClick()
+        private void OnCastPlaneButtonClick()
         {
-            _gameProgress.CurrentStage++;
+            _gameProgress.PlanesToWin--;
         }
 
         private void ShowCurrentStage()
         {
-            _currentStage.text = _gameProgress.CurrentStage.ToString();
+            _currentStage.text = (_gameProgress.CurrentStage + 1).ToString();
         }
 
         private void ShowCoinsAmount()
         {
             _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
+        }
+
+        private void ShowPlanesToHit()
+        {
+            if(_planeCounter.transform.childCount > _gameProgress.PlanesToWin)
+            {
+                for(int i = _planeCounter.transform.childCount; i > _gameProgress.PlanesToWin; i--)
+                {
+                    var plane = _planeCounter.transform.GetChild(0).gameObject;
+
+                    Destroy(plane);
+                }
+
+                return;
+            }
+
+            for(int counter = 0; counter < _gameProgress.PlanesToWin; counter++)
+            {
+                var plane = Instantiate(_planePrefab, _planeCounter.transform);
+            }
         }
     }
 }

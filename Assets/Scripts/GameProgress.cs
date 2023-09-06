@@ -8,8 +8,10 @@ namespace Appegy
     public class GameProgress : MonoBehaviour
     {
         public event Action OnCurrentStageChanged;
+        public event Action OnPlanesToWinChanged;
 
-        private int _currentStage;
+        private int _currentStage = 0;
+        private int _planesToWin;
 
         public int CurrentStage
         {
@@ -18,6 +20,19 @@ namespace Appegy
             {
                 _currentStage = value;
                 OnCurrentStageChanged?.Invoke();
+            }
+        }
+        public int PlanesToWin
+        {
+            get => _planesToWin;
+            set
+            {
+                _planesToWin = value;
+                OnPlanesToWinChanged?.Invoke();
+                if(value == 0)
+                {
+                    CurrentStage++;
+                }
             }
         }
 
