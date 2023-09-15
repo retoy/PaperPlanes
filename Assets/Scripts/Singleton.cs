@@ -1,4 +1,4 @@
-namespace Appegy
+namespace CroakGames
 {
     public class Singleton<T> where T : Singleton<T>, new()
     {

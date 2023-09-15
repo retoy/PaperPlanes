@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Appegy.UI.Menu
+namespace CroakGames.UI.Menu
 {
     public class SettingsPanel : MonoBehaviour
     {

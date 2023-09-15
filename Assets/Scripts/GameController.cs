@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Appegy
+namespace CroakGames
 {
     public class GameController : MonoBehaviour
     {
@@ -25,7 +25,7 @@ namespace Appegy
             _gameProgress.OnCurrentStageChanged += LoadLevel;
 
             var plane = Instantiate(_planeToCast, transform.GetChild(1));
-            plane.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane];
+            plane.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane].Sprite;
         }
 
         private void OnDestroy()

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace Appegy.UI.Game
+namespace CroakGames.UI.Game
 {
     public class GameOverUI : MonoBehaviour
     {

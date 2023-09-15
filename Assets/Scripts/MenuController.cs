@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Appegy
+namespace CroakGames
 {
     public class MenuController : MonoBehaviour
     {

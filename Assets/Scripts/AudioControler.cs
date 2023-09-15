@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Appegy
+namespace CroakGames
 {
     public class AudioControler : MonoBehaviour
     {

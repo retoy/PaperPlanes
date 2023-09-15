@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Appegy.UI.Menu
+namespace CroakGames.UI.Menu
 {
     public class MainMenuPanel : MonoBehaviour
     {

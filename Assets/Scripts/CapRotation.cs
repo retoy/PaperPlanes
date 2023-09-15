@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Appegy
+namespace CroakGames
 {
     public class CapRotation : MonoBehaviour
     {

@@ -7,8 +7,10 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using TMPro;
+using System.Runtime.CompilerServices;
 
-namespace Appegy.UI.Menu
+namespace CroakGames.UI.Menu
 {
     public class ShopPanel : MonoBehaviour
     {
@@ -18,16 +20,29 @@ namespace Appegy.UI.Menu
         private PlaneConfig _planeConfig;
         [SerializeField]
         private ShopCell _cellPrefab;
-        
+        [SerializeField]
+        private TMP_Text _coinsTotal;
+
+        private List<ShopCell> _shopAssortment = new List<ShopCell>();
+        private ShopCell _currentPlane;
+
         public Button HomeButton => _homeButton;
 
-        private void OnEnable()
+        private void Start()
         {
+            PlayerProgress.Instance.OnPlaneChanged += SetCurrentPlane;
+            PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsTotal;
+
             ShowShopAssortment();
+            SetCurrentPlane();
+            ShowCoinsTotal();
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
-            foreach(var plane in transform.GetComponentInChildren<GridLayoutGroup>().GetComponentsInChildren<ShopCell>())
+            PlayerProgress.Instance.OnPlaneChanged -= SetCurrentPlane;
+            PlayerProgress.Instance.OnCoinsValueChanged -= ShowCoinsTotal;
+
+            foreach (var plane in transform.GetComponentInChildren<GridLayoutGroup>().GetComponentsInChildren<ShopCell>())
             {
                 plane.Button.onClick.RemoveAllListeners();
             }
@@ -37,34 +52,47 @@ namespace Appegy.UI.Menu
 
         private void ShowShopAssortment()
         {
-            List<ShopCell> shopAssortment = new List<ShopCell>();
-
-            for(int index = 0; index < _planeConfig.planeList.Count; index++)
+            for (int index = 0; index < _planeConfig.PlaneList.Count; index++)
             {
                 int currentIndex = index;
 
                 var plane = Instantiate(_cellPrefab, transform.GetComponentInChildren<GridLayoutGroup>().transform);
-                plane.PlaneImage.sprite = _planeConfig.planeList[index].Sprite;
+                plane.PlaneImage.sprite = _planeConfig.PlaneList[index].Sprite;
+                plane.Text.text = _planeConfig.PlaneList[index].Price.ToString();
 
                 plane.Button.onClick.AddListener(() => onShopCellButtonClick(currentIndex));
-                shopAssortment.Add(plane);
+                _shopAssortment.Add(plane);
             }
-
-            showCurrentPlane(PlayerProgress.Instance.CurrentPlane);
+            _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlane];
 
             void onShopCellButtonClick(int newIndex)
             {
-                shopAssortment[PlayerProgress.Instance.CurrentPlane].FrameImage.color = Color.white;
-                shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "empty";
-
-                PlayerProgress.Instance.CurrentPlane = newIndex;
-                showCurrentPlane(newIndex);
+                //PlayerProgress.Instance.CurrentPlane = newIndex;
+                PurchaseSkin(newIndex);
             }
+        }
 
-            void showCurrentPlane(int index)
+        private void SetCurrentPlane()
+        {
+            _currentPlane.FrameImage.color = Color.white;
+            //_currentPlane.Text.text = "empty";
+            _shopAssortment[PlayerProgress.Instance.CurrentPlane].FrameImage.color = Color.green;
+            // shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "current";
+
+            _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlane];
+        }
+
+        private void ShowCoinsTotal()
+        {
+            _coinsTotal.text = PlayerProgress.Instance.CoinsTotal.ToString();
+        }
+
+        void PurchaseSkin(int index)
+        {
+            if (_planeConfig.PlaneList[index].Price <= PlayerProgress.Instance.CoinsTotal)
             {
-                shopAssortment[index].FrameImage.color = Color.green;
-                shopAssortment[index].Text.text = "current";
+                PlayerProgress.Instance.CurrentPlane = index;
+                PlayerProgress.Instance.CoinsTotal -= _planeConfig.PlaneList[index].Price;
             }
         }
     }

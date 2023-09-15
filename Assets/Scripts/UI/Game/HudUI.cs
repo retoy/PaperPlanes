@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Appegy.UI.Game
+namespace CroakGames.UI.Game
 {
     public class
         HudUI : MonoBehaviour

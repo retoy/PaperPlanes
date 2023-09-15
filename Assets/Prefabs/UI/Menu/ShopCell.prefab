@@ -57,6 +57,7 @@ MonoBehaviour:
   _button: {fileID: 8930836473315738708}
   _text: {fileID: 6207746197897646822}
   _planeImage: {fileID: 5640633240061138432}
+  _priceText: {fileID: 0}
 --- !u!114 &2942725852225334447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +174,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 25.3026}
-  m_SizeDelta: {x: 165, y: 165}
+  m_AnchoredPosition: {x: 0.3968, y: 25.3026}
+  m_SizeDelta: {x: 194.3671, y: 165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4436756341308890839
 CanvasRenderer:
@@ -279,7 +280,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: empty
+  m_text: 'empty
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}
   m_sharedMaterial: {fileID: -6368270602874676099, guid: 5aa844c153804ec4789006ab236eb65d, type: 2}

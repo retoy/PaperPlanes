@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Appegy
+namespace CroakGames
 {
     [CreateAssetMenu]
     public class LevelConfig : ScriptableObject

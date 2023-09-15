@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Appegy
+namespace CroakGames
 {
     public class PlayerProgress : Singleton<PlayerProgress>
     {
@@ -9,6 +9,7 @@ namespace Appegy
         public event Action OnBestScoreChanged;
         public event Action OnPlaneChanged;
         public event Action OnMusicVolumeChanged;
+
         public int CoinsTotal
         {
             get => PlayerPrefs.GetInt("Coins");
@@ -44,13 +45,21 @@ namespace Appegy
             set
             {
                 {
-                    
                     PlayerPrefs.SetFloat("Volume", value);
                     OnMusicVolumeChanged?.Invoke();
                 }
             }
         }
-        
+        public int BoughtSkins
+        {
+            get => PlayerPrefs.GetInt("SkinId");
+            set
+            {
+                PlayerPrefs.SetInt("SkinId", value);
+                //OnMusicVolumeChanged?.Invoke();
+            }
+        }
+
         public void SaveProgress()
         {
             PlayerPrefs.Save();

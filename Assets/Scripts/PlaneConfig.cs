@@ -2,19 +2,15 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Appegy
+namespace CroakGames
 {
     [CreateAssetMenu]
     public class PlaneConfig : ScriptableObject
     {
         [SerializeField]
         List<Plane> _planeList = new List<Plane>();
-        public List<Plane> planeList => _planeList;
-        //[SerializeField]
-        //List<Sprite> _spriteList = new List<Sprite>();
-        //public List<Sprite> SpriteList => _spriteList;
 
-
+        public List<Plane> PlaneList => _planeList;
     }
 
     [Serializable]
@@ -28,11 +24,13 @@ namespace Appegy
         private int _price;
         [SerializeField]
         private Sprite _sprite;
+
+        public int Price => _price;
         public Sprite Sprite
         {
             get { return _sprite; }
             set { _sprite = value; }
         }
-    }
 
+    }
 }

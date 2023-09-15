@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Appegy
+namespace CroakGames
 {
     public class ShopCell : MonoBehaviour
     {
@@ -21,5 +21,6 @@ namespace Appegy
         public Image PlaneImage => _planeImage;
         public Button Button => _button;
         public TMP_Text Text => _text;
+     
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Appegy.UI.Game
+namespace CroakGames.UI.Game
 {
     public class GameUI : MonoBehaviour
     {
