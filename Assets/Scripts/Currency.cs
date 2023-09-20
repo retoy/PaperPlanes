@@ -7,6 +7,6 @@ namespace CroakGames
     enum Currency
     {
         coins,
-        add
+        ad
     }
 }

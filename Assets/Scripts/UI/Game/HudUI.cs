@@ -38,7 +38,6 @@ namespace CroakGames.UI.Game
 
             ShowCoinsAmount();
         }
-
         private void OnDestroy()
         {
             _addCoinButton.onClick.RemoveListener(OnAddCoinButtonClick);
