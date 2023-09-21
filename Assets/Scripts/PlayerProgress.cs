@@ -10,7 +10,7 @@ namespace CroakGames
         public event Action OnPlaneChanged;
         public event Action OnMusicVolumeChanged;
         public event Action OnAdValueChanged;
-
+        public event Action OnSkinLockChanged;
         public int CoinsTotal
         {
             get => PlayerPrefs.GetInt("Coins");
@@ -68,6 +68,16 @@ namespace CroakGames
             {
                 PlayerPrefs.SetInt("Ad", value);
                 OnAdValueChanged?.Invoke();
+            }
+        }
+
+        public int SkinLock
+        {
+            get => PlayerPrefs.GetInt("SkinUnlocked_");
+            set
+            {
+                PlayerPrefs.SetInt("SkinUnlocked_", value);
+                OnSkinLockChanged?.Invoke();
             }
         }
 

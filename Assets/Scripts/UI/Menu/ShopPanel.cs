@@ -9,6 +9,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TMPro;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 
 namespace CroakGames.UI.Menu
 {
@@ -34,6 +35,7 @@ namespace CroakGames.UI.Menu
 
         private void Start()
         {
+            //PlayerPrefs.DeleteAll();
             _watchAdButton.onClick.AddListener(OnWatchAdButtonClick);
             PlayerProgress.Instance.OnPlaneChanged += SetCurrentPlane;
             PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsTotal;
@@ -69,8 +71,15 @@ namespace CroakGames.UI.Menu
 
                 var plane = Instantiate(_cellPrefab, transform.GetComponentInChildren<GridLayoutGroup>().transform);
                 plane.PlaneImage.sprite = _planeConfig.PlaneList[index].Sprite;
-                plane.Text.text = _planeConfig.PlaneList[index].Price.ToString();
-
+                bool skinUnlocked = PlayerPrefs.GetInt("SkinUnlocked_" + index, 0) == 1;
+                if (skinUnlocked)
+                {
+                    plane.Text.text = "use";
+                }
+                else
+                {
+                    plane.Text.text = _planeConfig.PlaneList[index].Price.ToString();
+                }
                 plane.Button.onClick.AddListener(() => onShopCellButtonClick(currentIndex));
                 _shopAssortment.Add(plane);
             }
@@ -78,6 +87,11 @@ namespace CroakGames.UI.Menu
 
             void onShopCellButtonClick(int newIndex)
             {
+                //if (_planeConfig.PlaneList[newIndex].Unlocked == true) 
+                //{
+                //    SetCurrentPlane();
+                //    return;
+                //}
                 if (_planeConfig.PlaneList[newIndex].PaymentType == (int)Currency.ad)
                 {
                     PurchaseAdSkin(newIndex);
@@ -95,7 +109,7 @@ namespace CroakGames.UI.Menu
             _currentPlane.FrameImage.color = Color.white;
             //_currentPlane.Text.text = "empty";
             _shopAssortment[PlayerProgress.Instance.CurrentPlane].FrameImage.color = Color.green;
-            // shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "current";
+            //_shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "current";
 
             _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlane];
         }
@@ -111,6 +125,7 @@ namespace CroakGames.UI.Menu
             {
                 PlayerProgress.Instance.CurrentPlane = index;
                 PlayerProgress.Instance.CoinsTotal -= _planeConfig.PlaneList[index].Price;
+                SaveBoughtSkin(index);
             }
         }
 
@@ -120,6 +135,7 @@ namespace CroakGames.UI.Menu
             {
                 PlayerProgress.Instance.CurrentPlane = index;
                 PlayerProgress.Instance.AdTotal -= _planeConfig.PlaneList[index].Price;
+                SaveBoughtSkin(index);
             }
         }
         private void OnWatchAdButtonClick()
@@ -130,6 +146,14 @@ namespace CroakGames.UI.Menu
         private void ShowAdTotal()
         {
             _adTotal.text = PlayerProgress.Instance.AdTotal.ToString();
+        }
+
+        private void SaveBoughtSkin(int index)
+        {
+            _planeConfig.PlaneList[index].Unlocked = true;
+            _planeConfig.PlaneList[index].Price = 0;
+            PlayerPrefs.SetInt("SkinUnlocked_" + index, 1);
+            PlayerPrefs.Save();
         }
     }
 }

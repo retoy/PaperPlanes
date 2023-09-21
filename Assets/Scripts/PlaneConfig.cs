@@ -26,7 +26,18 @@ namespace CroakGames
         private Sprite _sprite;
         [SerializeField]
         private Currency _paymentType;
-        public int Price => _price;
+        [SerializeField]
+        private bool _unlocked;
+        public bool Unlocked
+        {
+            get { return _unlocked; }
+            set { _unlocked = value; }
+        }
+        public int Price   
+        {
+            get { return _price; }
+            set { _price = value; }
+        }
         public Sprite Sprite
         {
             get { return _sprite; }
