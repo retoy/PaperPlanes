@@ -27,16 +27,16 @@ MonoBehaviour:
     _unlocked: 1
   - _name: Fire Plane
     _id: 3
-    _price: 666
+    _price: 0
     _sprite: {fileID: 21300000, guid: 9fb8428689fdc9e4b997036713bfce89, type: 3}
     _paymentType: 0
-    _unlocked: 0
+    _unlocked: 1
   - _name: Space Plane
     _id: 4
-    _price: 564
+    _price: 0
     _sprite: {fileID: 21300000, guid: 4c58f9f5954c7fc4289e8970fc4c2d63, type: 3}
     _paymentType: 0
-    _unlocked: 0
+    _unlocked: 1
   - _name: Military Plane(Ad)
     _id: 5
     _price: 0

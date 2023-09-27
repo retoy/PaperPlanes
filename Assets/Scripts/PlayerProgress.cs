@@ -57,7 +57,6 @@ namespace CroakGames
             set
             {
                 PlayerPrefs.SetInt("SkinId", value);
-                //OnMusicVolumeChanged?.Invoke();
             }
         }
 
