@@ -28,6 +28,12 @@ namespace CroakGames
         private Currency _paymentType;
         [SerializeField]
         private bool _unlocked;
+        private int _adCount;
+        public int AdCount
+        {
+            get { return _adCount; }
+            set { _adCount = value; }
+        }
         public bool Unlocked
         {
             get { return _unlocked; }
@@ -47,6 +53,10 @@ namespace CroakGames
         {
             get { return (int)_paymentType; }
             set { _paymentType = (Currency)value; }
+        }
+        public Plane()
+        {
+            _adCount = 1;
         }
     }
 }

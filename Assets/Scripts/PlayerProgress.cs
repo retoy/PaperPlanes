@@ -9,7 +9,6 @@ namespace CroakGames
         public event Action OnBestScoreChanged;
         public event Action OnPlaneChanged;
         public event Action OnMusicVolumeChanged;
-        public event Action OnAdValueChanged;
         public event Action OnSkinLockChanged;
         public int CoinsTotal
         {
@@ -20,7 +19,6 @@ namespace CroakGames
                 OnCoinsValueChanged?.Invoke();
             }
         }
-
         public int BestScore
         {
             get => PlayerPrefs.GetInt("Score");
@@ -30,7 +28,6 @@ namespace CroakGames
                 OnBestScoreChanged?.Invoke();
             }
         }
-
         public int CurrentPlane
         {
             get => PlayerPrefs.GetInt("Plane");
@@ -59,17 +56,6 @@ namespace CroakGames
                 PlayerPrefs.SetInt("SkinId", value);
             }
         }
-
-        public int AdTotal
-        {
-            get => PlayerPrefs.GetInt("Ad");
-            set
-            {
-                PlayerPrefs.SetInt("Ad", value);
-                OnAdValueChanged?.Invoke();
-            }
-        }
-
         public int SkinLock
         {
             get => PlayerPrefs.GetInt("SkinUnlocked_");
@@ -79,7 +65,6 @@ namespace CroakGames
                 OnSkinLockChanged?.Invoke();
             }
         }
-
         public void SaveProgress()
         {
             PlayerPrefs.Save();
