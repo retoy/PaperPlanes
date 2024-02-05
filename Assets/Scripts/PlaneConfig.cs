@@ -19,44 +19,32 @@ namespace CroakGames
         [SerializeField]
         private string _name;
         [SerializeField]
-        private string _id;
+        private int _id;
         [SerializeField]
         private int _price;
         [SerializeField]
         private Sprite _sprite;
         [SerializeField]
         private Currency _paymentType;
-        [SerializeField]
-        private bool _unlocked;
-        private int _adCount;
-        public int AdCount
+
+        public int Id
         {
-            get { return _adCount; }
-            set { _adCount = value; }
+            get => _id;
         }
-        public bool Unlocked
+        public int Price
         {
-            get { return _unlocked; }
-            set { _unlocked = value; }
-        }
-        public int Price   
-        {
-            get { return _price; }
+            get => _price;
             set { _price = value; }
         }
         public Sprite Sprite
         {
-            get { return _sprite; }
+            get => _sprite;
             set { _sprite = value; }
         }
-        public int PaymentType
+        public Currency PaymentType
         {
-            get { return (int)_paymentType; }
-            set { _paymentType = (Currency)value; }
-        }
-        public Plane()
-        {
-            _adCount = 1;
+            get => _paymentType;
+            set { _paymentType = value; }
         }
     }
 }

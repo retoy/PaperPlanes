@@ -37,6 +37,7 @@ namespace CroakGames.UI.Game
             PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsAmount;
 
             ShowCoinsAmount();
+            ShowCurrentStage();
         }
         private void OnDestroy()
         {
@@ -65,7 +66,7 @@ namespace CroakGames.UI.Game
 
         private void ShowCurrentStage()
         {
-            _currentStage.text = (_gameProgress.CurrentStage + 1).ToString();
+            _currentStage.text = (_gameProgress.CurrentStage).ToString();
         }
 
         private void ShowCoinsAmount()

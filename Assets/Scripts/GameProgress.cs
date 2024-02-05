@@ -10,7 +10,7 @@ namespace CroakGames
         public event Action OnCurrentStageChanged;
         public event Action OnPlanesToWinChanged;
 
-        private int _currentStage = 0;
+        private int _currentStage = 1;
         private int _planesToWin;
 
         public int CurrentStage

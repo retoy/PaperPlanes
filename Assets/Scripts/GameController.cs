@@ -25,7 +25,7 @@ namespace CroakGames
             _gameProgress.OnCurrentStageChanged += LoadLevel;
 
             var plane = Instantiate(_planeToCast, transform.GetChild(1));
-            plane.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlane].Sprite;
+            plane.GetComponent<SpriteRenderer>().sprite = _planeConfig.PlaneList[PlayerProgress.Instance.CurrentPlaneId].Sprite;
         }
 
         private void OnDestroy()

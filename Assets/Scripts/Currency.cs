@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace CroakGames
 {
-    enum Currency
+    public enum Currency
     {
-        coins,
-        ad
+        Coin,
+        Ad
     }
 }

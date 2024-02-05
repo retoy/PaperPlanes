@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace CroakGames
@@ -9,7 +10,7 @@ namespace CroakGames
         public event Action OnBestScoreChanged;
         public event Action OnPlaneChanged;
         public event Action OnMusicVolumeChanged;
-        public event Action OnSkinLockChanged;
+
         public int CoinsTotal
         {
             get => PlayerPrefs.GetInt("Coins");
@@ -28,7 +29,7 @@ namespace CroakGames
                 OnBestScoreChanged?.Invoke();
             }
         }
-        public int CurrentPlane
+        public int CurrentPlaneId
         {
             get => PlayerPrefs.GetInt("Plane");
             set
@@ -37,34 +38,37 @@ namespace CroakGames
                 OnPlaneChanged?.Invoke();
             }
         }
+        public string OpenPlanesId
+        {
+            get => PlayerPrefs.GetString("OpenPlanes");
+            set
+            {
+                var temp = PlayerPrefs.GetString("OpenPlanes");
+                PlayerPrefs.SetString("OpenPlanes", temp + value + ',');
+                SaveProgress();
+            }
+        }
         public float MusicVolume
         {
             get => PlayerPrefs.GetFloat("Volume");
             set
             {
-                {
-                    PlayerPrefs.SetFloat("Volume", value);
-                    OnMusicVolumeChanged?.Invoke();
-                }
+                PlayerPrefs.SetFloat("Volume", value);
+                OnMusicVolumeChanged?.Invoke();
+
             }
         }
-        public int BoughtSkins
+
+        public int GetAdPlane(int index)
         {
-            get => PlayerPrefs.GetInt("SkinId");
-            set
-            {
-                PlayerPrefs.SetInt("SkinId", value);
-            }
+            return PlayerPrefs.GetInt($"Plane_{index}", 0);
         }
-        public int SkinLock
+
+        public void SetAdPlane(int index, int adValue)
         {
-            get => PlayerPrefs.GetInt("SkinUnlocked_");
-            set
-            {
-                PlayerPrefs.SetInt("SkinUnlocked_", value);
-                OnSkinLockChanged?.Invoke();
-            }
+            PlayerPrefs.SetInt($"Plane_{index}", adValue);
         }
+
         public void SaveProgress()
         {
             PlayerPrefs.Save();

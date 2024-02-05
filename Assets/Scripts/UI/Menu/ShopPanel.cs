@@ -1,16 +1,8 @@
-using Cysharp.Threading.Tasks.Triggers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Reflection;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using TMPro;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
-using UnityEngine.U2D;
+using System;
 
 namespace CroakGames.UI.Menu
 {
@@ -24,8 +16,6 @@ namespace CroakGames.UI.Menu
         private ShopCell _cellPrefab;
         [SerializeField]
         private TMP_Text _coinsTotal;
-        [SerializeField]
-        private Button _watchAdButton;
 
         private List<ShopCell> _shopAssortment = new List<ShopCell>();
         private ShopCell _currentPlane;
@@ -36,98 +26,97 @@ namespace CroakGames.UI.Menu
         {
             PlayerProgress.Instance.OnPlaneChanged += SetCurrentPlane;
             PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsTotal;
-            ShowShopAssortment();
+
+            ShowAssortment();
             SetCurrentPlane();
             ShowCoinsTotal();
         }
+
         private void OnDestroy()
-        {       
+        {
             PlayerProgress.Instance.OnPlaneChanged -= SetCurrentPlane;
             PlayerProgress.Instance.OnCoinsValueChanged -= ShowCoinsTotal;
-            foreach (var plane in transform.GetComponentInChildren<GridLayoutGroup>().GetComponentsInChildren<ShopCell>())
+            foreach(var plane in transform.GetComponentInChildren<GridLayoutGroup>().GetComponentsInChildren<ShopCell>())
             {
                 plane.Button.onClick.RemoveAllListeners();
             }
+
             PlayerProgress.Instance.SaveProgress();
         }
-        private void ShowShopAssortment()
+
+        private void SetCurrentPlane()
         {
-            for (int index = 0; index < _planeConfig.PlaneList.Count; index++)
-            {   int currentIndex = index;
+            _currentPlane.IsOpen = true;
+            _shopAssortment[PlayerProgress.Instance.CurrentPlaneId].SetCurrent();
+            _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlaneId];
+        }
+
+        private void ShowAssortment()
+        {
+            List<string> openSkins = new List<string>();
+            openSkins.AddRange(PlayerProgress.Instance.OpenPlanesId.Split(','));
+
+            for(int index = 0; index < _planeConfig.PlaneList.Count; index++)
+            {
+                int currentIndex = index;
+
                 var plane = Instantiate(_cellPrefab, transform.GetComponentInChildren<GridLayoutGroup>().transform);
-                plane.PlaneImage.sprite = _planeConfig.PlaneList[index].Sprite;
-                SkinUnlockedCheck(index, plane);
-                plane.Button.onClick.AddListener(() => onShopCellButtonClick(currentIndex, plane));
+
+                plane.Plane = _planeConfig.PlaneList[index];
+                plane.IsOpen = openSkins.Contains(index.ToString());
+                if(!plane.IsOpen && plane.Plane.PaymentType == Currency.Ad && PlayerProgress.Instance.GetAdPlane(currentIndex) == 0)
+                {
+                    PlayerProgress.Instance.SetAdPlane(currentIndex, plane.Plane.Price);
+                }
+
+                plane.Button.onClick.AddListener(() => onShopCellButtonClick(currentIndex));
+
                 _shopAssortment.Add(plane);
             }
-            _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlane];
 
-            void onShopCellButtonClick(int newIndex, ShopCell plane)
+            _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlaneId];
+
+            void onShopCellButtonClick(int index)
             {
-                if (_planeConfig.PlaneList[newIndex].PaymentType == (int)Currency.ad)
+                var cell = _shopAssortment[index];
+                if(cell.IsOpen)
                 {
-                    PurchaseAdSkin(newIndex);
-                    if(_planeConfig.PlaneList[newIndex].Price != 0)
-                    {
-                        plane.Text.text = _planeConfig.PlaneList[newIndex].Price.ToString();
-                    }
+                    PlayerProgress.Instance.CurrentPlaneId = index;
                 }
                 else
                 {
-                    PurchaseSkin(newIndex);
+                    switch(_shopAssortment[index].Plane.PaymentType)
+                    {
+                        case Currency.Ad:
+                            var temp = PlayerProgress.Instance.GetAdPlane(index) - 1;
+                            if(temp <= 0)
+                            {
+                                cell.IsOpen = true;
+                                PlayerProgress.Instance.OpenPlanesId = cell.Plane.Id.ToString();
+                            }
+                            else
+                            {
+                                PlayerProgress.Instance.SetAdPlane(index, temp);
+                                cell.IsOpen = false;
+                            }
+                            break;
+
+                        case Currency.Coin:
+                            if(cell.Plane.Price <= PlayerProgress.Instance.CoinsTotal)
+                            {
+                                cell.IsOpen = true;
+                                PlayerProgress.Instance.CoinsTotal -= cell.Plane.Price;
+                                PlayerProgress.Instance.OpenPlanesId = cell.Plane.Id.ToString();
+                            }
+                            break;
+                    }
                 }
             }
         }
-        private void SetCurrentPlane()
-        {
-            _currentPlane.FrameImage.color = Color.white;
-            _currentPlane.Text.text = "have";
-            _shopAssortment[PlayerProgress.Instance.CurrentPlane].FrameImage.color = Color.green;
-            _shopAssortment[PlayerProgress.Instance.CurrentPlane].Text.text = "current";
-            _currentPlane = _shopAssortment[PlayerProgress.Instance.CurrentPlane];
-        }
+
         private void ShowCoinsTotal()
         {
             _coinsTotal.text = PlayerProgress.Instance.CoinsTotal.ToString();
-        }
-        void PurchaseSkin(int index)
-        {
-            if (_planeConfig.PlaneList[index].Price <= PlayerProgress.Instance.CoinsTotal)
-            {
-                PlayerProgress.Instance.CurrentPlane = index;
-                PlayerProgress.Instance.CoinsTotal -= _planeConfig.PlaneList[index].Price;
-                SaveBoughtSkin(index);
-            }
-        }
-        void PurchaseAdSkin(int index)
-        {
-            if (_planeConfig.PlaneList[index].Price > 0 & PlayerPrefs.GetInt("SkinUnlocked_" + index, 0) == 0) 
-            {
-                _planeConfig.PlaneList[index].Price -= _planeConfig.PlaneList[index].AdCount;
-            }
-            if (_planeConfig.PlaneList[index].Price == 0)
-            {
-                PlayerProgress.Instance.CurrentPlane = index;
-                SaveBoughtSkin(index);
-            }
-        }
-        private void SaveBoughtSkin(int index)
-        {
-            _planeConfig.PlaneList[index].Unlocked = true;
-            _planeConfig.PlaneList[index].Price = 0;
-            PlayerPrefs.SetInt("SkinUnlocked_" + index, 1);
-        }
-        private void SkinUnlockedCheck(int index, ShopCell plane)
-        {
-            if (PlayerPrefs.GetInt("SkinUnlocked_" + index, 0) == 1)
-            {
-                plane.Text.text = "have";
-                return;
-            }
-            else
-            {
-                plane.Text.text = _planeConfig.PlaneList[index].Price.ToString();
-            }
         }
     }
 }
