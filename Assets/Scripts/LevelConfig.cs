@@ -5,11 +5,6 @@ namespace CroakGames
     [CreateAssetMenu]
     public class LevelConfig : ScriptableObject
     {
-        public enum Function
-        {
-            Linear,
-            Linear2
-        }
         [SerializeField]
         private Sprite _cap;
         [SerializeField]
@@ -23,6 +18,5 @@ namespace CroakGames
         public Function Curve => _curve;
         public int PlanesToWin => _planesToWin;
         public Sprite Cap => _cap;
-
     }
 }
