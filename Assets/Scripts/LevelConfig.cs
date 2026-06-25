@@ -8,15 +8,18 @@ namespace CroakGames
         [SerializeField]
         private Sprite _planet;
         [SerializeField]
-        private Function _curve;
-        [SerializeField]
         private float _speed;
         [SerializeField]
+        private bool _clockwise;
+        [SerializeField]
         private int _planesToWin;
+        [SerializeField]
+        private int _coinReward = 1;
 
-        public float Speed => _speed;
-        public Function Curve => _curve;
-        public int PlanesToWin => _planesToWin;
         public Sprite Planet => _planet;
+        public float Speed => _speed;
+        public bool Clockwise => _clockwise;
+        public int PlanesToWin => _planesToWin;
+        public int CoinReward => _coinReward;
     }
 }
