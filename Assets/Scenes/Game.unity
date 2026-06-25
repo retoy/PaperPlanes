@@ -330,6 +330,7 @@ MonoBehaviour:
   _hudPrefab: {fileID: 5025862636093571199, guid: 54cd03a6677cddb4e9a6b9aebed12f51, type: 3}
   _gameOverUI: {fileID: 4630983892446204547, guid: d59bdac97b5a9f34f84494ca4b4dc138, type: 3}
   _gameProgress: {fileID: 1044236743}
+  _gameController: {fileID: 1044236745}
 --- !u!1 &689152373
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,10 +423,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _planet: {fileID: 1396902576}
-  _planeToCast: {fileID: 2451382535501032448, guid: 950d1ba3a4ed6b349b39fb23a6b206ae, type: 3}
+  _planeSpawn: {fileID: 689152374}
+  _planePrefab: {fileID: 2451382535501032448, guid: 950d1ba3a4ed6b349b39fb23a6b206ae, type: 3}
   _gameProgress: {fileID: 1044236743}
+  _input: {fileID: 1044236746}
   _planeConfig: {fileID: 11400000, guid: 7486799e88cf3c94c8a13a182f198ebb, type: 2}
   _progConfig: {fileID: 11400000, guid: a884311ead2863d479a8f798e9986bd0, type: 2}
+  _flightDuration: 0.12
+  _collisionThreshold: 14
 --- !u!114 &1044236746
 MonoBehaviour:
   m_ObjectHideFlags: 0

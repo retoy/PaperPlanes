@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CroakGames
@@ -22,6 +20,7 @@ namespace CroakGames
                 OnCurrentStageChanged?.Invoke();
             }
         }
+
         public int PlanesToWin
         {
             get => _planesToWin;
@@ -29,16 +28,12 @@ namespace CroakGames
             {
                 _planesToWin = value;
                 OnPlanesToWinChanged?.Invoke();
-                if(value == 0)
-                {
-                    CurrentStage++;
-                }
             }
         }
 
         public void SaveProgress()
         {
-            if(_currentStage > PlayerProgress.Instance.BestScore)
+            if (_currentStage > PlayerProgress.Instance.BestScore)
             {
                 PlayerProgress.Instance.BestScore = _currentStage;
             }
