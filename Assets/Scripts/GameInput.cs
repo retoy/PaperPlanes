@@ -8,33 +8,14 @@ namespace CroakGames
     {
         public event Action Tapped;
 
-        private InputAction _tap;
-
-        private void Awake()
+        private void Update()
         {
-            _tap = new InputAction(name: "Tap", type: InputActionType.Button, binding: "<Pointer>/press");
-            _tap.performed += OnTapPerformed;
-        }
+            var pointer = Pointer.current;
 
-        private void OnEnable()
-        {
-            _tap.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _tap.Disable();
-        }
-
-        private void OnDestroy()
-        {
-            _tap.performed -= OnTapPerformed;
-            _tap.Dispose();
-        }
-
-        private void OnTapPerformed(InputAction.CallbackContext context)
-        {
-            Tapped?.Invoke();
+            if (pointer != null && pointer.press.wasPressedThisFrame)
+            {
+                Tapped?.Invoke();
+            }
         }
     }
 }
