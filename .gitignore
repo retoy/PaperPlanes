@@ -65,3 +65,8 @@ crashlytics-build.properties
 [Aa]ssets/Settings/Addressables/Android*
 
 *.DS_Store
+
+# Claude Code artifacts
+.claude/
+CLAUDE.md
+DEVELOPMENT_PLAN.md
