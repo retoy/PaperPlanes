@@ -15,55 +15,56 @@ namespace CroakGames.UI.Game
 
         [SerializeField]
         private GameProgress _gameProgress;
+        [SerializeField]
+        private GameController _gameController;
+
+        private HudUI _hud;
 
         private void Awake()
         {
             ShowHudUI();
         }
 
+        private void OnEnable()
+        {
+            _gameController.GameOver += OnGameOver;
+        }
+
+        private void OnDisable()
+        {
+            _gameController.GameOver -= OnGameOver;
+        }
+
         private void ShowHudUI()
         {
-            var panel = Instantiate(_hudPrefab, _container);
+            _hud = Instantiate(_hudPrefab, _container);
+            _hud.SetGameProgress(_gameProgress);
+        }
 
-            panel.LooseButton.onClick.AddListener(showLoosePanel);
-            panel.SetGameProgress(_gameProgress);
-
-            void release()
+        private void OnGameOver()
+        {
+            if (_hud != null)
             {
-                panel.LooseButton.onClick.RemoveListener(showLoosePanel);
-                Destroy(panel.gameObject);
+                Destroy(_hud.gameObject);
             }
 
-            void showLoosePanel()
-            {
-                release();
-                ShowLoosePanel();
-            }
+            ShowLoosePanel();
         }
 
         private void ShowLoosePanel()
         {
             var panel = Instantiate(_gameOverUI, _container);
 
-            panel.HomeButton.onClick.AddListener(home);
-            panel.RestartButton.onClick.AddListener(restart);
+            panel.HomeButton.onClick.AddListener(Home);
+            panel.RestartButton.onClick.AddListener(Restart);
 
-            void release()
+            void Home()
             {
-                panel.HomeButton.onClick.RemoveListener(home);
-                panel.RestartButton.onClick.RemoveListener(restart);
-                Destroy(panel.gameObject);
-            }
-
-            void home()
-            {
-                release();
                 SceneManager.LoadScene("Menu");
             }
 
-            void restart()
+            void Restart()
             {
-                release();
                 SceneManager.LoadScene("Game");
             }
         }

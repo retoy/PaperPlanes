@@ -1,22 +1,14 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 namespace CroakGames.UI.Game
 {
-    public class
-        HudUI : MonoBehaviour
+    public class HudUI : MonoBehaviour
     {
         [SerializeField]
         private TMP_Text _coinsAmount;
         [SerializeField]
         private TMP_Text _currentStage;
-        [SerializeField]
-        private Button _looseButton;
-        [SerializeField]
-        private Button _addCoinButton;
-        [SerializeField]
-        private Button _castPlaneButton;
         [SerializeField]
         private GameObject _planeCounter;
         [SerializeField]
@@ -25,25 +17,19 @@ namespace CroakGames.UI.Game
         [SerializeField]
         private GameProgress _gameProgress;
 
-        public Button LooseButton => _looseButton;
-
         private void Start()
         {
-            _addCoinButton.onClick.AddListener(OnAddCoinButtonClick);
-            _castPlaneButton.onClick.AddListener(OnCastPlaneButtonClick);
-
             _gameProgress.OnCurrentStageChanged += ShowCurrentStage;
             _gameProgress.OnPlanesToWinChanged += ShowPlanesToHit;
             PlayerProgress.Instance.OnCoinsValueChanged += ShowCoinsAmount;
 
             ShowCoinsAmount();
             ShowCurrentStage();
+            ShowPlanesToHit();
         }
+
         private void OnDestroy()
         {
-            _addCoinButton.onClick.RemoveListener(OnAddCoinButtonClick);
-            _castPlaneButton.onClick.RemoveListener(OnCastPlaneButtonClick);
-
             _gameProgress.OnCurrentStageChanged -= ShowCurrentStage;
             _gameProgress.OnPlanesToWinChanged -= ShowPlanesToHit;
             PlayerProgress.Instance.OnCoinsValueChanged -= ShowCoinsAmount;
@@ -54,19 +40,9 @@ namespace CroakGames.UI.Game
             _gameProgress = gameProgress;
         }
 
-        private void OnAddCoinButtonClick()
-        {
-            PlayerProgress.Instance.CoinsTotal++;
-        }
-
-        private void OnCastPlaneButtonClick()
-        {
-            _gameProgress.PlanesToWin--;
-        }
-
         private void ShowCurrentStage()
         {
-            _currentStage.text = (_gameProgress.CurrentStage).ToString();
+            _currentStage.text = _gameProgress.CurrentStage.ToString();
         }
 
         private void ShowCoinsAmount()
@@ -88,9 +64,9 @@ namespace CroakGames.UI.Game
                 return;
             }
 
-            for(int counter = 0; counter < _gameProgress.PlanesToWin; counter++)
+            for(int counter = _planeCounter.transform.childCount; counter < _gameProgress.PlanesToWin; counter++)
             {
-                var plane = Instantiate(_planePrefab, _planeCounter.transform);
+                Instantiate(_planePrefab, _planeCounter.transform);
             }
         }
     }
