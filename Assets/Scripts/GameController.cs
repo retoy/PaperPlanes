@@ -21,6 +21,10 @@ namespace CroakGames
         private PlaneConfig _planeConfig;
         [SerializeField]
         private ProgressionConfig _progConfig;
+        [SerializeField]
+        private Sfx _sfx;
+        [SerializeField]
+        private CameraShake _cameraShake;
 
         [SerializeField]
         private float _flightDuration = 0.12f;
@@ -56,6 +60,11 @@ namespace CroakGames
             if (_isFlying || _isGameOver || _readyPlane == null)
             {
                 return;
+            }
+
+            if (_sfx != null)
+            {
+                _sfx.PlayThrow();
             }
 
             StartCoroutine(FlyRoutine());
@@ -108,6 +117,11 @@ namespace CroakGames
                 return;
             }
 
+            if (_sfx != null)
+            {
+                _sfx.PlayStick();
+            }
+
             var center = _planet.transform.position;
             _readyPlane.transform.up = (center - _readyPlane.transform.position).normalized;
 
@@ -148,6 +162,16 @@ namespace CroakGames
         {
             _isFlying = false;
             _isGameOver = true;
+
+            if (_sfx != null)
+            {
+                _sfx.PlayLose();
+            }
+
+            if (_cameraShake != null)
+            {
+                _cameraShake.Shake();
+            }
 
             _gameProgress.SaveProgress();
             GameOver?.Invoke();

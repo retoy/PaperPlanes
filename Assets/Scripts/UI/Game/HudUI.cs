@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -16,6 +17,11 @@ namespace CroakGames.UI.Game
 
         [SerializeField]
         private GameProgress _gameProgress;
+
+        [SerializeField]
+        private float _punchScale = 1.25f;
+        [SerializeField]
+        private float _punchDuration = 0.2f;
 
         private void Start()
         {
@@ -43,11 +49,13 @@ namespace CroakGames.UI.Game
         private void ShowCurrentStage()
         {
             _currentStage.text = _gameProgress.CurrentStage.ToString();
+            Punch(_currentStage.rectTransform);
         }
 
         private void ShowCoinsAmount()
         {
             _coinsAmount.text = PlayerProgress.Instance.CoinsTotal.ToString();
+            Punch(_coinsAmount.rectTransform);
         }
 
         private void ShowPlanesToHit()
@@ -68,6 +76,32 @@ namespace CroakGames.UI.Game
             {
                 Instantiate(_planePrefab, _planeCounter.transform);
             }
+        }
+
+        private void Punch(RectTransform target)
+        {
+            if (!isActiveAndEnabled || target == null)
+            {
+                return;
+            }
+
+            StartCoroutine(PunchRoutine(target));
+        }
+
+        private IEnumerator PunchRoutine(RectTransform target)
+        {
+            var elapsed = 0f;
+
+            while (elapsed < _punchDuration)
+            {
+                elapsed += Time.deltaTime;
+                var t = Mathf.Clamp01(elapsed / _punchDuration);
+                var scale = Mathf.Lerp(_punchScale, 1f, t);
+                target.localScale = Vector3.one * scale;
+                yield return null;
+            }
+
+            target.localScale = Vector3.one;
         }
     }
 }
