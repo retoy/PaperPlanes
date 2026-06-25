@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
+using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 namespace CroakGames
 {
@@ -8,14 +10,43 @@ namespace CroakGames
     {
         public event Action Tapped;
 
+        private bool _mouseWasPressed;
+
+        private void OnEnable()
+        {
+            EnhancedTouchSupport.Enable();
+        }
+
+        private void OnDisable()
+        {
+            EnhancedTouchSupport.Disable();
+        }
+
         private void Update()
         {
-            var pointer = Pointer.current;
+            foreach (var touch in ETouch.Touch.activeTouches)
+            {
+                if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began)
+                {
+                    Tapped?.Invoke();
+                    return;
+                }
+            }
 
-            if (pointer != null && pointer.press.wasPressedThisFrame)
+            var mouse = Mouse.current;
+            if (mouse == null)
+            {
+                return;
+            }
+
+            var pressed = mouse.leftButton.isPressed;
+
+            if (pressed && !_mouseWasPressed)
             {
                 Tapped?.Invoke();
             }
+
+            _mouseWasPressed = pressed;
         }
     }
 }
