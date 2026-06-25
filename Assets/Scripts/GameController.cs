@@ -90,11 +90,11 @@ namespace CroakGames
             {
                 elapsed += Time.deltaTime;
                 var t = Mathf.Clamp01(elapsed / _flightDuration);
-                _readyPlane.transform.position = Vector3.Lerp(start, PlanetTopPoint(), t);
+                _readyPlane.transform.position = Vector3.Lerp(start, PlaneStickPoint(), t);
                 yield return null;
             }
 
-            _readyPlane.transform.position = PlanetTopPoint();
+            _readyPlane.transform.position = PlaneStickPoint();
             Stick();
         }
 
@@ -107,6 +107,12 @@ namespace CroakGames
                 LoseGame();
                 return;
             }
+
+            var center = _planet.transform.position;
+            _readyPlane.transform.up = (center - _readyPlane.transform.position).normalized;
+
+            var planeRenderer = _readyPlane.GetComponent<SpriteRenderer>();
+            planeRenderer.sortingOrder = _planet.GetComponent<SpriteRenderer>().sortingOrder - 1;
 
             _readyPlane.transform.SetParent(_planet.transform, true);
             _stuckPlanes.Add(_readyPlane);
@@ -171,9 +177,9 @@ namespace CroakGames
             return false;
         }
 
-        private Vector3 PlanetTopPoint()
+        private Vector3 PlaneStickPoint()
         {
-            return _planet.transform.position + Vector3.up * PlanetRadius();
+            return _planet.transform.position - Vector3.up * PlanetRadius();
         }
 
         private float PlanetRadius()
