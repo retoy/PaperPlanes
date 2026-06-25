@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CroakGames
 {
-    public class CapRotation : MonoBehaviour
+    public class PlanetRotation : MonoBehaviour
     {
         [SerializeField]
         private LevelConfig _level;

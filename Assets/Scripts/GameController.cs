@@ -5,7 +5,7 @@ namespace CroakGames
     public class GameController : MonoBehaviour
     {
         [SerializeField]
-        private CapRotation _cap;
+        private PlanetRotation _planet;
         [SerializeField]
         private GameObject _planeToCast;
         [SerializeField]
@@ -18,7 +18,7 @@ namespace CroakGames
         private void Start()
         {
             LoadLevel();
-
+            
             _gameProgress.OnCurrentStageChanged += LoadLevel;
 
             var plane = Instantiate(_planeToCast, transform.GetChild(1));
@@ -37,10 +37,10 @@ namespace CroakGames
             var stage = _gameProgress.CurrentStage;
 
             var currentLvl = _progConfig.GetConfig(stage);
-            var spriteRenderer = _cap.GetComponent<SpriteRenderer>();
+            var spriteRenderer = _planet.GetComponent<SpriteRenderer>();
 
-            _cap.Level = currentLvl;
-            spriteRenderer.sprite = currentLvl.Cap;
+            _planet.Level = currentLvl;
+            spriteRenderer.sprite = currentLvl.Planet;
 
             _gameProgress.PlanesToWin = currentLvl.PlanesToWin;
         }

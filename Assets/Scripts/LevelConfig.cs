@@ -6,7 +6,7 @@ namespace CroakGames
     public class LevelConfig : ScriptableObject
     {
         [SerializeField]
-        private Sprite _cap;
+        private Sprite _planet;
         [SerializeField]
         private Function _curve;
         [SerializeField]
@@ -17,6 +17,6 @@ namespace CroakGames
         public float Speed => _speed;
         public Function Curve => _curve;
         public int PlanesToWin => _planesToWin;
-        public Sprite Cap => _cap;
+        public Sprite Planet => _planet;
     }
 }
