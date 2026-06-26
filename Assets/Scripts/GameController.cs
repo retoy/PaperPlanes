@@ -114,7 +114,7 @@ namespace CroakGames
 
             var planetRenderer = _planet.GetComponent<SpriteRenderer>();
             var localRadius = planetRenderer.sprite.bounds.extents.y;
-            var sortingOrder = planetRenderer.sortingOrder + 1;
+            var sortingOrder = planetRenderer.sortingOrder - 1;
 
             foreach (var angle in BuildCoinAngles(level))
             {
