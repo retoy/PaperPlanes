@@ -15,8 +15,15 @@ namespace CroakGames
         {
             _music.clip = _clip;
             _music.loop = true;
-            AudioListener.volume = PlayerProgress.Instance.MusicVolume;
+            ApplyMusicVolume();
             _music.Play();
+
+            PlayerProgress.Instance.OnMusicVolumeChanged += ApplyMusicVolume;
+        }
+
+        private void OnDestroy()
+        {
+            PlayerProgress.Instance.OnMusicVolumeChanged -= ApplyMusicVolume;
         }
 
         private void Awake()
@@ -31,6 +38,11 @@ namespace CroakGames
                 gameObject.tag = _musicTag;
                 DontDestroyOnLoad(gameObject);
             }
+        }
+
+        private void ApplyMusicVolume()
+        {
+            _music.volume = PlayerProgress.Instance.MusicVolume;
         }
     }
 }

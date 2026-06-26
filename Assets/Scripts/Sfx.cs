@@ -21,7 +21,7 @@ namespace CroakGames
 
         private void Play(AudioClip clip)
         {
-            if (_source == null || clip == null)
+            if (_source == null || clip == null || !PlayerProgress.Instance.SfxEnabled)
             {
                 return;
             }

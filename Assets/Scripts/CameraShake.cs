@@ -20,6 +20,11 @@ namespace CroakGames
 
         public void Shake()
         {
+            if (!PlayerProgress.Instance.ShakeEnabled)
+            {
+                return;
+            }
+
             if (_routine != null)
             {
                 StopCoroutine(_routine);

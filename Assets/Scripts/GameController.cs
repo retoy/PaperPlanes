@@ -30,6 +30,16 @@ namespace CroakGames
         private float _flightDuration = 0.12f;
         [SerializeField]
         private float _collisionThreshold = 14f;
+        [SerializeField]
+        private float _bounceDuration = 1f;
+        [SerializeField]
+        private float _bounceDistance = 24f;
+        [SerializeField]
+        private float _bounceSpin = 220f;
+        [SerializeField]
+        private float _bounceFadeStart = 0.55f;
+        [SerializeField]
+        private float _bounceOutward = 0.6f;
 
         public event Action GameOver;
 
@@ -113,7 +123,7 @@ namespace CroakGames
 
             if (IsTooClose(angle))
             {
-                LoseGame();
+                StartCoroutine(LoseRoutine(angle));
                 return;
             }
 
@@ -158,7 +168,7 @@ namespace CroakGames
             SpawnReadyPlane();
         }
 
-        private void LoseGame()
+        private IEnumerator LoseRoutine(float angle)
         {
             _isFlying = false;
             _isGameOver = true;
@@ -173,8 +183,64 @@ namespace CroakGames
                 _cameraShake.Shake();
             }
 
+            yield return StartCoroutine(BounceRoutine(angle));
+
             _gameProgress.SaveProgress();
             GameOver?.Invoke();
+        }
+
+        private IEnumerator BounceRoutine(float angle)
+        {
+            var plane = _readyPlane;
+            _readyPlane = null;
+
+            var center = _planet.transform.position;
+            var contact = plane.transform.position;
+            var outward = (contact - center).normalized;
+            var deflect = DeflectSign(angle);
+            var tangent = new Vector3(-outward.y, outward.x, 0f) * deflect;
+            var direction = (outward * _bounceOutward + tangent).normalized;
+            var target = contact + direction * _bounceDistance;
+
+            var renderer = plane.GetComponent<SpriteRenderer>();
+            var color = renderer.color;
+            var elapsed = 0f;
+
+            while (elapsed < _bounceDuration)
+            {
+                elapsed += Time.deltaTime;
+                var t = Mathf.Clamp01(elapsed / _bounceDuration);
+                var ease = t * t * (3f - 2f * t);
+
+                plane.transform.position = Vector3.Lerp(contact, target, ease);
+                plane.transform.Rotate(0f, 0f, _bounceSpin * Time.deltaTime * deflect);
+
+                color.a = 1f - Mathf.InverseLerp(_bounceFadeStart, 1f, t);
+                renderer.color = color;
+
+                yield return null;
+            }
+
+            Destroy(plane);
+        }
+
+        private float DeflectSign(float angle)
+        {
+            var nearest = 0f;
+            var best = float.MaxValue;
+
+            foreach (var stuck in _stuckAngles)
+            {
+                var delta = Mathf.DeltaAngle(angle, stuck);
+
+                if (Mathf.Abs(delta) < best)
+                {
+                    best = Mathf.Abs(delta);
+                    nearest = delta;
+                }
+            }
+
+            return nearest >= 0f ? -1f : 1f;
         }
 
         private void ClearStuckPlanes()

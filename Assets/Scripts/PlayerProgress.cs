@@ -10,6 +10,8 @@ namespace CroakGames
         public event Action OnBestScoreChanged;
         public event Action OnPlaneChanged;
         public event Action OnMusicVolumeChanged;
+        public event Action OnSfxEnabledChanged;
+        public event Action OnShakeEnabledChanged;
 
         public int CoinsTotal
         {
@@ -56,6 +58,24 @@ namespace CroakGames
                 PlayerPrefs.SetFloat("Volume", value);
                 OnMusicVolumeChanged?.Invoke();
 
+            }
+        }
+        public bool SfxEnabled
+        {
+            get => PlayerPrefs.GetInt("SfxEnabled", 1) == 1;
+            set
+            {
+                PlayerPrefs.SetInt("SfxEnabled", value ? 1 : 0);
+                OnSfxEnabledChanged?.Invoke();
+            }
+        }
+        public bool ShakeEnabled
+        {
+            get => PlayerPrefs.GetInt("ShakeEnabled", 1) == 1;
+            set
+            {
+                PlayerPrefs.SetInt("ShakeEnabled", value ? 1 : 0);
+                OnShakeEnabledChanged?.Invoke();
             }
         }
 
