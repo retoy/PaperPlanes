@@ -15,5 +15,7 @@ MonoBehaviour:
   _planet: {fileID: 21300000, guid: 0e950f37c161e01488c749dcaa8c6969, type: 3}
   _speed: 120
   _clockwise: 1
+  _speedAmplitude: 0.6
+  _speedFrequency: 0.35
   _planesToWin: 5
   _coinReward: 1

@@ -15,3 +15,9 @@ MonoBehaviour:
   _levelConfigs:
   - {fileID: 11400000, guid: 96f48b43f6a0ead459edec7e5844932e, type: 2}
   - {fileID: 11400000, guid: 5c9f95591ab66ff4abf739fc7973a4be, type: 2}
+  - {fileID: 11400000, guid: 7be42620bfadf0bb9d736ae603a76eaf, type: 2}
+  - {fileID: 11400000, guid: 88b2798e3b0c080077735cd49a8384b1, type: 2}
+  - {fileID: 11400000, guid: eafd3e261f2ff020f37babf63ee77e1e, type: 2}
+  - {fileID: 11400000, guid: 4a25ff89260181157f17bf8c1a549a09, type: 2}
+  - {fileID: 11400000, guid: b2938f75d1cc70f85d040648b324a39a, type: 2}
+  - {fileID: 11400000, guid: 68dfc9b1140ba55a55630ea2b36ec57c, type: 2}
