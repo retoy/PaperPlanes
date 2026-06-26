@@ -442,6 +442,7 @@ MonoBehaviour:
   _planet: {fileID: 1396902576}
   _planeSpawn: {fileID: 689152374}
   _planePrefab: {fileID: 2451382535501032448, guid: 950d1ba3a4ed6b349b39fb23a6b206ae, type: 3}
+  _coinPrefab: {fileID: 7598607847524555014, guid: 60caf0afa02f35a498c58553ef9305d7, type: 3}
   _gameProgress: {fileID: 1044236743}
   _input: {fileID: 1044236746}
   _planeConfig: {fileID: 11400000, guid: 7486799e88cf3c94c8a13a182f198ebb, type: 2}
@@ -450,6 +451,13 @@ MonoBehaviour:
   _cameraShake: {fileID: 519420033}
   _flightDuration: 0.12
   _collisionThreshold: 14
+  _coinPickupThreshold: 14
+  _coinValue: 1
+  _bounceDuration: 0.5
+  _bounceDistance: 30
+  _bounceSpin: 540
+  _bounceFadeStart: 0.55
+  _bounceOutward: 0.6
 --- !u!114 &1044236746
 MonoBehaviour:
   m_ObjectHideFlags: 0
