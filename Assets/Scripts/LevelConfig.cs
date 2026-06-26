@@ -19,6 +19,8 @@ namespace CroakGames
         private int _planesToWin;
         [SerializeField]
         private int _coinReward = 1;
+        [SerializeField]
+        private float[] _coinAngles;
 
         public Sprite Planet => _planet;
         public float Speed => _speed;
@@ -27,5 +29,6 @@ namespace CroakGames
         public float SpeedFrequency => _speedFrequency;
         public int PlanesToWin => _planesToWin;
         public int CoinReward => _coinReward;
+        public float[] CoinAngles => _coinAngles;
     }
 }

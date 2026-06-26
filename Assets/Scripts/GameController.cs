@@ -14,6 +14,8 @@ namespace CroakGames
         [SerializeField]
         private GameObject _planePrefab;
         [SerializeField]
+        private GameObject _coinPrefab;
+        [SerializeField]
         private GameProgress _gameProgress;
         [SerializeField]
         private GameInput _input;
@@ -31,6 +33,10 @@ namespace CroakGames
         [SerializeField]
         private float _collisionThreshold = 14f;
         [SerializeField]
+        private float _coinPickupThreshold = 14f;
+        [SerializeField]
+        private int _coinValue = 1;
+        [SerializeField]
         private float _bounceDuration = 1f;
         [SerializeField]
         private float _bounceDistance = 24f;
@@ -45,6 +51,8 @@ namespace CroakGames
 
         private readonly List<GameObject> _stuckPlanes = new List<GameObject>();
         private readonly List<float> _stuckAngles = new List<float>();
+        private readonly List<GameObject> _coins = new List<GameObject>();
+        private readonly List<float> _coinAngles = new List<float>();
 
         private GameObject _readyPlane;
         private bool _isFlying;
@@ -84,11 +92,38 @@ namespace CroakGames
         {
             var level = _progConfig.GetConfig(_gameProgress.CurrentStage - 1);
 
+            ClearCoins();
+
             _planet.transform.rotation = Quaternion.identity;
             _planet.Level = level;
             _planet.GetComponent<SpriteRenderer>().sprite = level.Planet;
 
             _gameProgress.PlanesToWin = level.PlanesToWin;
+
+            SpawnCoins(level);
+        }
+
+        private void SpawnCoins(LevelConfig level)
+        {
+            if (_coinPrefab == null || level.CoinAngles == null)
+            {
+                return;
+            }
+
+            var radius = PlanetRadius();
+            var sortingOrder = _planet.GetComponent<SpriteRenderer>().sortingOrder + 1;
+
+            foreach (var angle in level.CoinAngles)
+            {
+                var coin = Instantiate(_coinPrefab);
+                coin.transform.SetParent(_planet.transform, false);
+                coin.transform.localPosition = Quaternion.Euler(0f, 0f, -angle) * (Vector3.down * radius);
+                coin.transform.localRotation = Quaternion.identity;
+                coin.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder;
+
+                _coins.Add(coin);
+                _coinAngles.Add(angle);
+            }
         }
 
         private void SpawnReadyPlane()
@@ -126,6 +161,8 @@ namespace CroakGames
                 StartCoroutine(LoseRoutine(angle));
                 return;
             }
+
+            TryCollectCoin(angle);
 
             if (_sfx != null)
             {
@@ -252,6 +289,34 @@ namespace CroakGames
 
             _stuckPlanes.Clear();
             _stuckAngles.Clear();
+        }
+
+        private void TryCollectCoin(float angle)
+        {
+            for (int i = 0; i < _coinAngles.Count; i++)
+            {
+                if (Mathf.Abs(Mathf.DeltaAngle(angle, _coinAngles[i])) >= _coinPickupThreshold)
+                {
+                    continue;
+                }
+
+                PlayerProgress.Instance.CoinsTotal += _coinValue;
+                Destroy(_coins[i]);
+                _coins.RemoveAt(i);
+                _coinAngles.RemoveAt(i);
+                return;
+            }
+        }
+
+        private void ClearCoins()
+        {
+            foreach (var coin in _coins)
+            {
+                Destroy(coin);
+            }
+
+            _coins.Clear();
+            _coinAngles.Clear();
         }
 
         private bool IsTooClose(float angle)
