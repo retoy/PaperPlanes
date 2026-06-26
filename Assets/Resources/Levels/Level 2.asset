@@ -19,5 +19,6 @@ MonoBehaviour:
   _speedFrequency: 0.4
   _planesToWin: 7
   _coinReward: 1
-  _coinAngles:
-  - 180
+  _coinAngles: []
+  _randomCoinsMin: 1
+  _randomCoinsMax: 2
