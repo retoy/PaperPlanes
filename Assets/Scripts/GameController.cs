@@ -37,6 +37,8 @@ namespace CroakGames
         [SerializeField]
         private int _coinValue = 1;
         [SerializeField]
+        private float _coinMinSeparation = 30f;
+        [SerializeField]
         private float _bounceDuration = 1f;
         [SerializeField]
         private float _bounceDistance = 24f;
@@ -105,25 +107,69 @@ namespace CroakGames
 
         private void SpawnCoins(LevelConfig level)
         {
-            if (_coinPrefab == null || level.CoinAngles == null)
+            if (_coinPrefab == null)
             {
                 return;
             }
 
-            var radius = PlanetRadius();
-            var sortingOrder = _planet.GetComponent<SpriteRenderer>().sortingOrder + 1;
+            var planetRenderer = _planet.GetComponent<SpriteRenderer>();
+            var localRadius = planetRenderer.sprite.bounds.extents.y;
+            var sortingOrder = planetRenderer.sortingOrder + 1;
 
-            foreach (var angle in level.CoinAngles)
+            foreach (var angle in BuildCoinAngles(level))
             {
                 var coin = Instantiate(_coinPrefab);
                 coin.transform.SetParent(_planet.transform, false);
+
+                var coinRenderer = coin.GetComponent<SpriteRenderer>();
+                var coinHalf = coinRenderer.sprite.bounds.extents.y * coin.transform.localScale.y;
+                var radius = localRadius + coinHalf;
+
                 coin.transform.localPosition = Quaternion.Euler(0f, 0f, -angle) * (Vector3.down * radius);
                 coin.transform.localRotation = Quaternion.identity;
-                coin.GetComponent<SpriteRenderer>().sortingOrder = sortingOrder;
+                coinRenderer.sortingOrder = sortingOrder;
 
                 _coins.Add(coin);
                 _coinAngles.Add(angle);
             }
+        }
+
+        private List<float> BuildCoinAngles(LevelConfig level)
+        {
+            var angles = new List<float>();
+
+            if (level.CoinAngles != null)
+            {
+                angles.AddRange(level.CoinAngles);
+            }
+
+            var randomCount = UnityEngine.Random.Range(level.RandomCoinsMin, level.RandomCoinsMax + 1);
+            var target = angles.Count + randomCount;
+            var attempts = 0;
+
+            while (angles.Count < target && attempts < 200)
+            {
+                attempts++;
+
+                var candidate = UnityEngine.Random.Range(0f, 360f);
+                var fits = true;
+
+                foreach (var existing in angles)
+                {
+                    if (Mathf.Abs(Mathf.DeltaAngle(candidate, existing)) < _coinMinSeparation)
+                    {
+                        fits = false;
+                        break;
+                    }
+                }
+
+                if (fits)
+                {
+                    angles.Add(candidate);
+                }
+            }
+
+            return angles;
         }
 
         private void SpawnReadyPlane()

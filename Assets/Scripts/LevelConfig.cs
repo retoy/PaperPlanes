@@ -21,6 +21,10 @@ namespace CroakGames
         private int _coinReward = 1;
         [SerializeField]
         private float[] _coinAngles;
+        [SerializeField]
+        private int _randomCoinsMin;
+        [SerializeField]
+        private int _randomCoinsMax;
 
         public Sprite Planet => _planet;
         public float Speed => _speed;
@@ -30,5 +34,7 @@ namespace CroakGames
         public int PlanesToWin => _planesToWin;
         public int CoinReward => _coinReward;
         public float[] CoinAngles => _coinAngles;
+        public int RandomCoinsMin => _randomCoinsMin;
+        public int RandomCoinsMax => _randomCoinsMax;
     }
 }
